@@ -1,0 +1,1056 @@
+-------------------------copyright----------------------
+This is the Debian GNU/Linux prepackaged version of ppp.
+
+This package was previously maintained by Ian Murdock <imurdock@debian.org>,
+Alvar Bray <alvar@debian.org>, Christoph Lameter <clameter@debian.org>,
+Philip Hands <phil@hands.com>, Michael Beattie <mjb@debian.org> and
+Russell Coker <russell@coker.com.au>.
+
+It is currently maintained by Marco d'Itri <md@linux.it>
+and Chris Boot <bootc@debian.org>.
+
+Original sources were obtained from:
+  git://ozlabs.org/~paulus/ppp.git
+
+The options file was originally obtained from:
+  ftp://sunsite.unc.edu/pub/Linux/system/Network/serial/pppopt.tgz
+It was later heavily modified by various people, with additions from
+different sources.
+
+All of the code can be freely used and redistributed.  The individual
+source files each have their own copyright and permission notice; some
+have a BSD-style notice and some are under the GPL.
+
+
+Follows the BSD-like licenses. Not all of them apply to all parts of pppd.
+
+ * Copyright (c) 2003 Paul Mackerras. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. The name(s) of the authors of this software must not be used to
+ *    endorse or promote products derived from this software without
+ *    prior written permission.
+ *
+ * 3. Redistributions of any form whatsoever must retain the following
+ *    acknowledgment:
+ *    "This product includes software developed by Paul Mackerras
+ *     <paulus@samba.org>".
+ *
+ * THE AUTHORS OF THIS SOFTWARE DISCLAIM ALL WARRANTIES WITH REGARD TO
+ * THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+ * AND FITNESS, IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY
+ * SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
+ * AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
+ * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+ * Copyright (c) 1995 Pedro Roque Marques.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The names of the authors of this software must not be used to
+ *    endorse or promote products derived from this software without
+ *    prior written permission.
+ *
+ * 4. Redistributions of any form whatsoever must retain the following
+ *    acknowledgment:
+ *    "This product includes software developed by Pedro Roque Marques
+ *     <pedro_m@yahoo.com>"
+ *
+ * THE AUTHORS OF THIS SOFTWARE DISCLAIM ALL WARRANTIES WITH REGARD TO
+ * THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+ * AND FITNESS, IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY
+ * SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
+ * AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
+ * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+ * Copyright (c) 1995 Eric Rosenquist.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The name(s) of the authors of this software must not be used to
+ *    endorse or promote products derived from this software without
+ *    prior written permission.
+ *
+ * THE AUTHORS OF THIS SOFTWARE DISCLAIM ALL WARRANTIES WITH REGARD TO
+ * THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+ * AND FITNESS, IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY
+ * SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
+ * AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
+ * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+ * Copyright (c) 2002 Google, Inc.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The name(s) of the authors of this software must not be used to
+ *    endorse or promote products derived from this software without
+ *    prior written permission.
+ *
+ * THE AUTHORS OF THIS SOFTWARE DISCLAIM ALL WARRANTIES WITH REGARD TO
+ * THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+ * AND FITNESS, IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY
+ * SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
+ * AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
+ * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+ * Copyright (c) 2001 by Sun Microsystems, Inc.
+ * All rights reserved.
+ *
+ * Non-exclusive rights to redistribute, modify, translate, and use
+ * this software in source and binary forms, in whole or in part, is
+ * hereby granted, provided that the above copyright notice is
+ * duplicated in any source form, and that neither the name of the
+ * copyright holder nor the author is used to endorse or promote
+ * products derived from this software.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+ * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
+ * Copyright (c) 1999 Tommi Komulainen.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The name(s) of the authors of this software must not be used to
+ *    endorse or promote products derived from this software without
+ *    prior written permission.
+ *
+ * 4. Redistributions of any form whatsoever must retain the following
+ *    acknowledgment:
+ *    "This product includes software developed by Tommi Komulainen
+ *     <Tommi.Komulainen@iki.fi>".
+ *
+ * THE AUTHORS OF THIS SOFTWARE DISCLAIM ALL WARRANTIES WITH REGARD TO
+ * THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+ * AND FITNESS, IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY
+ * SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
+ * AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
+ * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+ * Copyright (c) 1984-2000 Carnegie Mellon University. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The name "Carnegie Mellon University" must not be used to
+ *    endorse or promote products derived from this software without
+ *    prior written permission. For permission or any legal
+ *    details, please contact
+ *      Office of Technology Transfer
+ *      Carnegie Mellon University
+ *      5000 Forbes Avenue
+ *      Pittsburgh, PA  15213-3890
+ *      (412) 268-4387, fax: (412) 268-7395
+ *      tech-transfer@andrew.cmu.edu
+ *
+ * 4. Redistributions of any form whatsoever must retain the following
+ *    acknowledgment:
+ *    "This product includes software developed by Computing Services
+ *     at Carnegie Mellon University (http://www.cmu.edu/computing/)."
+ *
+ * CARNEGIE MELLON UNIVERSITY DISCLAIMS ALL WARRANTIES WITH REGARD TO
+ * THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+ * AND FITNESS, IN NO EVENT SHALL CARNEGIE MELLON UNIVERSITY BE LIABLE
+ * FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
+ * AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
+ * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+ ***********************************************************************
+ ** Copyright (C) 1990, RSA Data Security, Inc. All rights reserved.  **
+ **                                                                   **
+ ** License to copy and use this software is granted provided that    **
+ ** it is identified as the "RSA Data Security, Inc. MD5 Message-     **
+ ** Digest Algorithm" in all material mentioning or referencing this  **
+ ** software or this function.                                        **
+ **                                                                   **
+ ** License is also granted to make and use derivative works          **
+ ** provided that such works are identified as "derived from the RSA  **
+ ** Data Security, Inc. MD5 Message-Digest Algorithm" in all          **
+ ** material mentioning or referencing the derived work.              **
+ **                                                                   **
+ ** RSA Data Security, Inc. makes no representations concerning       **
+ ** either the merchantability of this software or the suitability    **
+ ** of this software for any particular purpose.  It is provided "as  **
+ ** is" without express or implied warranty of any kind.              **
+ **                                                                   **
+ ** These notices must be retained in any copies of any part of this  **
+ ** documentation and/or software.                                    **
+ ***********************************************************************
+
+The `chat' program is in the public domain.
+
+spinlock.c and tdb.c are licensed under the GNU LGPL version 2 or later
+and they are:
+   Copyright (C) Anton Blanchard                   2001
+   Copyright (C) Andrew Tridgell              1999-2004
+   Copyright (C) Paul `Rusty' Russell              2000
+   Copyright (C) Jeremy Allison                    2000-2003
+
+On Debian systems, the complete text of the GNU General Public License version 2
+can be found in `/usr/share/common-licenses/GPL-2'.
+
+pppd/plugins/rp-pppoe/* is:
+
+* Copyright (C) 2000 by Roaring Penguin Software Inc.
+*
+* This program may be distributed according to the terms of the GNU
+* General Public License, version 2 or (at your option) any later version.
+
+The rp-pppoe author stated in a private email to Marco d'Itri that,
+as an exception to the license, linking with OpenSSL is allowed.
+
+pppd/plugins/winbind.c is licensed under the GNU GPL version 2 or later
+and is:
+* Copyright (C) 2003 Andrew Bartlet <abartlet@samba.org>
+* Copyright 1999 Paul Mackerras, Alan Curry.
+* Copyright (C) 2002 Roaring Penguin Software Inc.
+
+pppd/plugins/pppoatm.c is licensed under the GNU GPL version 2 or later
+and is:
+ * Copyright 2000 Mitchell Blank Jr.
+
+
+The following copyright notices apply to plugins/radius/*:
+
+Copyright (C) 2002 Roaring Penguin Software Inc.
+
+Permission to use, copy, modify, and distribute this software for any
+purpose and without fee is hereby granted, provided that this
+copyright and permission notice appear on all copies and supporting
+documentation, the name of Roaring Penguin Software Inc. not be used
+in advertising or publicity pertaining to distribution of the program
+without specific prior permission, and notice be given in supporting
+documentation that copying and distribution is by permission of
+Roaring Penguin Software Inc..
+
+Roaring Penguin Software Inc. makes no representations about the
+suitability of this software for any purpose.  It is provided "as is"
+without express or implied warranty.
+
+Copyright (C) 1995,1996,1997,1998 Lars Fenneberg <lf@elemental.net>
+
+Permission to use, copy, modify, and distribute this software for any
+purpose and without fee is hereby granted, provided that this copyright and
+permission notice appear on all copies and supporting documentation, the
+name of Lars Fenneberg not be used in advertising or publicity pertaining to
+distribution of the program without specific prior permission, and notice be
+given in supporting documentation that copying and distribution is by
+permission of Lars Fenneberg.
+
+Lars Fenneberg makes no representations about the suitability of this
+software for any purpose.  It is provided "as is" without express or implied
+warranty.
+
+Copyright 1992 Livingston Enterprises, Inc.
+Livingston Enterprises, Inc. 6920 Koll Center Parkway Pleasanton, CA  94566
+
+Permission to use, copy, modify, and distribute this software for any
+purpose and without fee is hereby granted, provided that this copyright
+and permission notice appear on all copies and supporting documentation,
+the name of Livingston Enterprises, Inc. not be used in advertising or
+publicity pertaining to distribution of the program without specific
+prior permission, and notice be given in supporting documentation that
+copying and distribution is by permission of Livingston Enterprises, Inc.
+
+Livingston Enterprises, Inc. makes no representations about the suitability
+of this software for any purpose.  It is provided "as is" without express
+or implied warranty.
+
+[C] The Regents of the University of Michigan and Merit Network, Inc. 1992,
+1993, 1994, 1995 All Rights Reserved
+
+Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee is hereby granted, provided
+that the above copyright notice and this permission notice appear in all
+copies of the software and derivative works or modified versions thereof,
+and that both the copyright notice and this permission and disclaimer
+notice appear in supporting documentation.
+
+THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE REGENTS OF THE
+UNIVERSITY OF MICHIGAN AND MERIT NETWORK, INC. DO NOT WARRANT THAT THE
+FUNCTIONS CONTAINED IN THE SOFTWARE WILL MEET LICENSEE'S REQUIREMENTS OR
+THAT OPERATION WILL BE UNINTERRUPTED OR ERROR FREE.  The Regents of the
+University of Michigan and Merit Network, Inc. shall not be liable for any
+special, indirect, incidental or consequential damages with respect to any
+claim by Licensee or any third party arising from use of the software.
+
+Copyright (C) 1991-2, RSA Data Security, Inc. Created 1991.
+All rights reserved.
+
+License to copy and use this software is granted provided that it
+is identified as the "RSA Data Security, Inc. MD5 Message-Digest
+Algorithm" in all material mentioning or referencing this software
+or this function.
+
+License is also granted to make and use derivative works provided
+that such works are identified as "derived from the RSA Data
+Security, Inc. MD5 Message-Digest Algorithm" in all material
+mentioning or referencing the derived work.
+
+RSA Data Security, Inc. makes no representations concerning either
+the merchantability of this software or the suitability of this
+software for any particular purpose. It is provided "as is"
+without express or implied warranty of any kind.
+
+These notices must be retained in any copies of any part of this
+documentation and/or software.
+
+* radius.c
+*
+* Copyright (C) 2002 Roaring Penguin Software Inc.
+*
+* This plugin may be distributed according to the terms of the GNU
+* General Public License, version 2 or (at your option) any later version.
+
+
+-------------------------defaultroute----------------------
+From: Marek Michalkiewicz <marekm@linux.org.pl>
+To: Debian Bug Tracking System <submit@bugs.debian.org>
+Subject: Bug#85426: default route uses wrong interface with the same IP address
+
+Package: ppp
+Version: 2.4.0f-1
+Severity: wishlist
+
+The pppd "defaultroute" option, when the ppp0 interface comes up, seems
+to do the equivalent of "route add default gw $ip_address", and I think
+it should do the equivalent of "route add default dev ppp0" instead.
+
+In most normal cases this shouldn't matter (because each interface has
+its own unique IP address), but specifying the interface by name (not
+by its IP address) may be preferable if there is more than one interface
+with the same IP address.
+
+I have a dummy0 interface with the same IP address as that of ppp0.
+This makes it possible to connect to the box from the internal LAN
+using its normal hostname (even if ppp0 is down at the moment), and
+to run named (possibly started before ppp0 comes up) as non-root.
+
+Using the "defaultroute" option causes pppd to set up the default route
+via dummy0 (first device found with matching IP address), not ppp0.
+I've worked around this by disabling the pppd defaultroute option and
+creating a small shell script called /etc/ppp/ip-up.d/000defaultroute
+(run before 00ipmasq) with the following contents:
+
+#! /bin/sh
+set -e
+/sbin/route add default dev $PPP_IFACE
+
+This gets the default route right (no corresponding ip-down script is
+necessary - when ppp0 goes down, the route is removed automatically).
+Please consider at least documenting this workaround, as I think it
+may be useful to someone.
+
+Thanks,
+Marek
+
+-- System Information
+Debian Release: testing/unstable
+Architecture: i386
+Kernel: Linux alf 2.2.19pre7 #1 Sat Jan 27 15:26:41 CET 2001 i586
+
+Versions of packages ppp depends on:
+ii  libc6                         2.2.1-1    GNU C Library: Shared libraries an
+ii  libpam-modules                0.72-12    Pluggable Authentication Modules f
+ii  libpam0g                      0.72-12    Pluggable Authentication Modules l
+ii  netbase                       4.05       Basic TCP/IP networking system    
+ii  sysvinit                      2.78-4     System-V like init.               
+
+
+-------------------------examples----------------------
+
+
+-------------------------README.cbcp----------------------
+	     Microsoft Call Back Configuration Protocol.
+			by Pedro Roque Marques
+			(updated by Paul Mackerras)
+
+The CBCP is a method by which the Microsoft Windows NT Server may
+implement additional security. It is possible to configure the server
+in such a manner so as to require that the client systems which
+connect with it are required that following a valid authentication to
+leave a method by which the number may be returned call.
+
+It is a requirement of servers to be so configured that the protocol be
+exchanged.
+
+So, this set of patches may be applied to the pppd process to enable
+the cbcp client *only* portion of the specification. It is primarily
+meant to permit connection with Windows NT Servers.
+
+The ietf-working specification may be obtained from ftp.microsoft.com
+in the developr/rfc directory.
+
+The ietf task group has decided to recommend that the LCP sequence be
+extended to permit the callback operation. For this reason, these
+patches are not 'part' of pppd but are an adjunct to the code.
+
+To enable CBCP support, all that is required is to uncomment the line
+in Makefile.linux that sets CBCP=y and recompile pppd.
+
+I use such script to make a callback:
+
+pppd debug nodetach /dev/modem 115200 crtscts modem	\
+callback 222222 name NAME remotename SERVER	\
+connect 'chat -v "" atz OK atdt111111 CONNECT ""'
+sleep 1
+pppd debug /dev/modem 115200 crtscts modem	\
+name NAME remotename SERVER defaultroute	\
+connect 'chat -v RING ATA CONNECT "\c"'
+
+First we invoke pppd with 'nodetach' option in order to not detach from
+the controlling terminal and 'callback NUMBER' option, then wait for
+1 second and invoke pppd again which waits for a callback (RING) and
+then answers (ATA). Number 222222 is a callback number, i.e. server will
+call us back at this number, while number 111111 is the number we are
+calling to.
+
+You have to put in /etc/ppp/chap-secrets the following two lines:
+
+NAME SERVER PASSWORD
+SERVER NAME PASSWORD
+
+You have to use your real login name, remote server name and password.
+
+
+
+-------------------------README.MPPE----------------------
+PPP Support for MPPE (Microsoft Point to Point Encryption)
+==========================================================
+
+Frank Cusack		frank@google.com
+Mar 19, 2002
+
+Updated by Paul Mackerras, Sep 2008
+
+
+DISCUSSION
+
+MPPE is Microsoft's encryption scheme for PPP links.  It is pretty much
+solely intended for use with PPP over Internet links -- if you have a true
+point to point link you have little need for encryption.  It is generally
+used with PPTP.
+
+MPPE is negotiated within CCP (Compression Control Protocol) as option
+18.  In order for MPPE to work, both peers must agree to do it.  This
+complicates things enough that I chose to implement it as strictly a binary
+option, off by default.  If you turn it on, all other compression options
+are disabled and MPPE *must* be negotiated successfully in both directions
+(CCP is unidirectional) or the link will be disconnected.  I think this is
+reasonable since, if you want encryption, you want encryption.  That is,
+I am not convinced that optional encryption is useful.
+
+While PPP regards MPPE as a "compressor", it actually expands every frame
+by 4 bytes, the MPPE overhead (encapsulation).
+
+Because of the data expansion, you'll see that ppp interfaces get their
+mtu reduced by 4 bytes whenever MPPE is negotiated.  This is because
+when MPPE is active, it is *required* that *every* packet be encrypted.
+PPPD sets the mtu = MIN(peer mru, configured mtu).  To ensure that
+MPPE frames are not larger than the peer's mru, we reduce the mtu by 4
+bytes so that the network layer never sends ppp a packet that's too large.
+
+There is an option to compress the data before encrypting (MPPC), however
+the algorithm is patented and requires execution of a license with Hifn.
+MPPC as an RFC is a complete farce.  I have no further details on MPPC.
+
+Some recommendations:
+
+- Use stateless mode.  Stateful mode is disabled by default.  Unfortunately,
+  stateless mode is very expensive as the peers must rekey for every packet.
+- Use 128-bit encryption.
+- Use MS-CHAPv2 only.
+
+Reference documents:
+
+    <http://www.ietf.org/rfc/rfc3078.txt> MPPE
+    <http://www.ietf.org/rfc/rfc3079.txt> MPPE Key Derivation
+    <http://www.ietf.org/rfc/rfc2118.txt> MPPC
+    <http://www.ietf.org/rfc/rfc2637.txt> PPTP
+    <http://www.ietf.org/rfc/rfc2548.txt> MS RADIUS Attributes
+
+You might be interested in PoPToP, a Linux PPTP server.  You can find it at
+<http://www.poptop.org/>
+
+RADIUS support for MPPE is from Ralf Hofmann, <ralf.hofmann@elvido.net>.
+
+
+BUILDING THE PPPD
+
+The userland component of PPPD has no additional requirements above
+those for MS-CHAP and MS-CHAPv2.
+
+MPPE support is now included in the mainline Linux kernel releases.
+
+
+CONFIGURATION
+
+See pppd(8) for the MPPE options.  Under Linux, if your modutils is earlier
+than 2.4.15, you will need to add
+
+    alias ppp-compress-18 ppp_mppe
+
+to /etc/modules.conf.
+
+
+
+
+-------------------------README.MSCHAP81----------------------
+PPP Support for Microsoft's CHAP-81
+===================================
+
+Frank Cusack		frank@google.com
+
+Some text verbatim from README.MSCHAP80,
+by Eric Rosenquist, rosenqui@strataware.com
+
+INTRODUCTION
+
+First, please read README.MSCHAP80; almost everything there applies here.
+MS-CHAP was basically devised by Microsoft because rather than store
+plaintext passwords, they (Microsoft) store the md4 hash of passwords.
+It provides no advantage over standard CHAP, since the hash is used
+as plaintext-equivalent.  (Well, the Change-Password packet is arguably
+an advantage.)  It does introduce a significant weakness if the LM hash
+is used.  Additionally, the format of the failure packet potentially
+gives information to an attacker.  The weakness of the LM hash is partly
+addressed in RFC 2433, which deprecates its use.
+
+MS-CHAPv2 adds 2 benefits to MS-CHAP.  (1) The LM hash is no longer
+used.  (2) Mutual authentication is required.  Note that the mutual
+authentication in MS-CHAPv2 is different than the case where both PPP
+peers require authentication from the other; the former proves that
+the server has access to the client's password, the latter proves that
+the server has access to a secret which the client also has -- which
+may or may not be the same as the client's password (but should not be
+the same, per RFC 1994).  Whether this provides any actual benefit is
+outside the scope of this document.  The details of MS-CHAPv2 can be
+found in the document:
+
+    <http://www.ietf.org/rfc/rfc2759.txt>
+
+
+BUILDING THE PPPD
+
+In addition to the requirements for MS-CHAP, MS-CHAPv2 uses the SHA-1
+hash algorithm.  A public domain implementation is provided with pppd.
+
+
+TROUBLESHOOTING
+
+Assuming that everything else has been configured correctly for PPP and
+CHAP, the MS-CHAPv2-specific problems you're likely to encounter are mostly
+related to your Windows NT account and its settings.  A Microsoft server
+returns error codes in its CHAP response.  The following are extracted from
+RFC 2759:
+
+ 646 ERROR_RESTRICTED_LOGON_HOURS
+ 647 ERROR_ACCT_DISABLED
+ 648 ERROR_PASSWD_EXPIRED
+ 649 ERROR_NO_DIALIN_PERMISSION
+ 691 ERROR_AUTHENTICATION_FAILURE
+ 709 ERROR_CHANGING_PASSWORD
+
+You'll see these in your pppd log as a line similar to:
+
+   Remote message: E=649 No dialin permission
+
+Previously, pppd would log this as:
+
+   Remote message: E=649 R=0
+
+Now, the text message is logged (both for MS-CHAP and MS-CHAPv2).
+
+
+
+-------------------------README.pppoe----------------------
+		PPPoE Support
+		-------------
+
+		Michal Ostrowski
+		8 August 2001
+
+		for ppp-2.4.2
+		Updated for ppp-2.4.5 by Paul Mackerras, Sep 08
+
+1. Introduction
+---------------
+
+This document describes the support for PPP over Ethernet (PPPoE)
+included with this package.  It is assumed that the reader is
+familiar with Linux PPP (as it pertains to tty/modem-based
+connections).  In particular, users of PPP in the Linux 2.2 series
+kernels should ensure they are familiar with the changes to the PPP
+implementation in the 2.4 series kernels before attempting to use
+PPPoE features.
+
+If you are not familiar with PPP, I recommend looking at other
+packages which include end-user configuration tools, such as Roaring
+Penguin (http://www.roaringpenguin.com/pppoe).
+
+PPPoE is a protocol typically used by *DSL providers to manage IP
+addresses and authenticate users.  Essentially, PPPoE provides for a
+PPP connection to be established not over a physical serial-line or
+modem, but over a logical connection between two unique MAC-addresses
+on an ethernet network.  Once the PPPoE layer discovers the end-points
+to be used in the link and negotiates it, frames may be sent to and
+received from the PPPoE layer just as if the link was a serial line
+(or that is how it's supposed to be).
+
+With this in mind, the goal of the implementation of PPPoE support in
+Linux is to allow users to simply specify that the device they intend
+to use for the PPP connection is an ethernet device (e.g. "eth0") and
+the rest of the system should function as usual.
+
+2. Using PPPoE
+--------------
+
+This section is a quick guide for getting PPPoE working, to allow one
+to connect to their ISP who is providing PPPoE based services.
+
+1.  Enable "Prompt for development and/or incomplete code/drivers" and
+    "PPP over Ethernet" in your kernel configuration.  Most distributions
+    will include the kernel PPPoE module by default.
+
+2.  Compile and install your kernel.
+
+3.  Install the ppp package.
+
+4.  Add the following line to /etc/ppp/options:
+
+    plugin rp-pppoe.so
+
+    The effect of this line is simply to make "eth0", "eth1",
+    ....,"ethx" all valid device names for pppd (just like ttyS0,
+    ttyS1).
+
+5.  Add the necessary authentication options to your pppd
+    configuration (i.e. PAP/CHAP information).  If you wish to
+    maintain seperate configurations for different devices you may
+    place configuration options in device-specific configuration
+    files: /etc/ppp/options.devname (devname=ttyS0, ttyS1, eth0, eth1
+    or any other valid device name).
+
+6.  Invoke pppd with the appropriate device name: e.g. "pppd eth0"
+
+
+Do not include any compression or flow control options in your PPPoE
+configuration.  They will be ignored.
+
+Again, here it is assumed that the reader is familiar with the general
+process of configuring PPP.  The steps outlined here refer only to the
+steps and configuration options which are PPPoE specific, and it is
+assumed that the reader will also configure other aspects of the system
+(e.g. PAP authentication parameters).
+
+3.  Advanced Functionality
+--------------------------
+
+For more advanced functionality (such as providing PPPoE services) and
+user configuration tools, look to the Roaring Penguin PPPoE software
+package (http://www.roaringpenguin.com/pppoe).
+
+4.  Credits
+-----------
+
+The PPPoE plugin included in this package is a component of the
+Roaring Penguin PPPoE package, included in this package courtesy of
+Roaring Penguin Software. (http://www.roaringpenguin.com).
+
+
+
+-------------------------README.pppol2tp----------------------
+PPPoL2TP plugin
+===============
+
+The pppol2tp plugin lets pppd use the Linux kernel driver pppol2tp.ko
+to pass PPP frames in L2TP tunnels. The driver was integrated into the
+kernel in the 2.6.23 release. For kernels before 2.6.23, an
+out-of-tree kernel module is available from the pppol2tp-kmod package
+in the OpenL2TP project.
+
+Note that pppd receives only PPP control frames over the PPPoL2TP
+socket; data frames are handled entirely by the kernel.
+
+The pppol2tp plugin adds extra arguments to pppd and uses the Linux kernel
+PPP-over-L2TP driver to set up each session's data path.
+
+Arguments are:-
+
+pppol2tp <fd>                   - FD for PPPoL2TP socket
+pppol2tp_lns_mode               - PPPoL2TP LNS behavior. Default off.
+pppol2tp_send_seq               - PPPoL2TP enable sequence numbers in
+                                  transmitted data packets. Default off.
+pppol2tp_recv_seq               - PPPoL2TP enforce sequence numbers in
+                                  received data packets. Default off.
+pppol2tp_reorderto <millisecs>  - PPPoL2TP data packet reorder timeout.
+                                  Default 0 (no reordering).
+pppol2tp_debug_mask <mask>      - PPPoL2TP debug mask. Bitwise OR of
+				  1 - verbose debug
+				  2 - control
+				  4 - kernel transport
+				  8 - ppp packet data
+				  Default: 0 (no debug).
+pppol2tp_ifname <ifname>	- Name of PPP network interface visible
+				  to "ifconfig" and "ip link".
+				  Default: "pppN"
+pppol2tp_tunnel_id <id>		- L2TP tunnel_id tunneling this PPP
+				  session.
+pppol2tp_session_id <id>	- L2TP session_id of this PPP session.
+				  The tunnel_id/session_id pair is used
+				  when sending event messages to openl2tpd.
+
+pppd will typically be started by an L2TP daemon for each L2TP sesion,
+supplying one or more of the above arguments as required. The pppd
+user will usually have no visibility of these arguments.
+
+Two hooks are exported by this plugin.
+
+void (*pppol2tp_send_accm_hook)(int tunnel_id, int session_id,
+     uint32_t send_accm, uint32_t recv_accm);
+void (*pppol2tp_ip_updown_hook)(int tunnel_id, int session_id, int up);
+
+Credits
+=======
+
+This plugin was developed by Katalix Systems as part of the OpenL2TP
+project, http://openl2tp.sourceforge.net. OpenL2TP is a full-featured
+L2TP client-server, suitable for use as an enterprise L2TP VPN server
+or a VPN client.
+
+Please copy problems to the OpenL2TP mailing list:
+openl2tp-users@lists.sourceforge.net.
+
+Maintained by:
+	James Chapman
+	jchapman@katalix.com
+	Katalix Systems Ltd
+	http://www.katalix.com
+
+
+-------------------------README.pwfd----------------------
+
+	Support to pass the password via a pipe to the pppd
+	---------------------------------------------------
+
+	Arvin Schnell <arvin@suse.de>
+	2002-02-08
+
+
+1. Introduction
+---------------
+
+Normally programs like wvdial or kppp read the online password from their
+config file and store them in the pap- and chap-secrets before they start the
+pppd and remove them afterwards. Sure they need special privileges to do so.
+
+The passwordfd feature offers a simpler and more secure solution. The program
+that starts the pppd opens a pipe and writes the password into it. The pppd
+simply reads the password from that pipe.
+
+This methods is used for quite a while on SuSE Linux by the programs wvdial,
+kppp and smpppd.
+
+
+2. Example
+----------
+
+Here is a short C program that uses the passwordfd feature. It starts the pppd
+to buildup a pppoe connection.
+
+
+--snip--
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <signal.h>
+#include <string.h>
+#include <paths.h>
+
+#ifndef _PATH_PPPD
+#define _PATH_PPPD "/usr/sbin/pppd"
+#endif
+
+
+// Of course these values can be read from a configuration file or
+// entered in a graphical dialog.
+char *device = "eth0";
+char *username = "1122334455661122334455660001@t-online.de";
+char *password = "hello";
+
+pid_t pid = 0;
+
+
+void
+sigproc (int src)
+{
+    fprintf (stderr, "Sending signal %d to pid %d\n", src, pid);
+    kill (pid, src);
+    exit (EXIT_SUCCESS);
+}
+
+
+void
+sigchild (int src)
+{
+    fprintf (stderr, "Daemon died\n");
+    exit (EXIT_SUCCESS);
+}
+
+
+int
+start_pppd ()
+{
+    signal (SIGINT, &sigproc);
+    signal (SIGTERM, &sigproc);
+    signal (SIGCHLD, &sigchild);
+
+    pid = fork ();
+    if (pid < 0) {
+	fprintf (stderr, "unable to fork() for pppd: %m\n");
+	return 0;
+    }
+
+    if (pid == 0) {
+
+	int i, pppd_argc = 0;
+	char *pppd_argv[20];
+	char buffer[32] = "";
+	int pppd_passwdfd[2];
+
+	for (i = 0; i < 20; i++)
+	    pppd_argv[i] = NULL;
+
+	pppd_argv[pppd_argc++] = "pppd";
+
+	pppd_argv[pppd_argc++] = "call";
+	pppd_argv[pppd_argc++] = "pwfd-test";
+
+	// The device must be after the call, since the call loads the plugin.
+	pppd_argv[pppd_argc++] = device;
+
+	pppd_argv[pppd_argc++] = "user";
+	pppd_argv[pppd_argc++] = username;
+
+	// Open a pipe to pass the password to pppd.
+	if (pipe (pppd_passwdfd) == -1) {
+	    fprintf (stderr, "pipe failed: %m\n");
+	    exit (EXIT_FAILURE);
+	}
+
+	// Of course this only works it the password is shorter
+	// than the pipe buffer. Otherwise you have to fork to
+	// prevent that your main program blocks.
+	write (pppd_passwdfd[1], password, strlen (password));
+	close (pppd_passwdfd[1]);
+
+	// Tell the pppd to read the password from the fd.
+	pppd_argv[pppd_argc++] = "passwordfd";
+	snprintf (buffer, 32, "%d", pppd_passwdfd[0]);
+	pppd_argv[pppd_argc++] = buffer;
+
+	if (execv (_PATH_PPPD, (char **) pppd_argv) < 0) {
+	    fprintf (stderr, "cannot execl %s: %m\n", _PATH_PPPD);
+	    exit (EXIT_FAILURE);
+	}
+    }
+
+    pause ();
+
+    return 1;
+}
+
+
+int
+main (int argc, char **argv)
+{
+    if (start_pppd ())
+	exit (EXIT_SUCCESS);
+
+    exit (EXIT_FAILURE);
+}
+
+---snip---
+
+
+Copy this file to /etc/ppp/peers/pwfd-test. The plugins can't be loaded on the
+command line (unless you are root) since the plugin option is privileged.
+
+
+---snip---
+
+#
+# PPPoE plugin for kernel 2.4
+#
+plugin pppoe.so
+
+#
+# This plugin enables us to pipe the password to pppd, thus we don't have
+# to fiddle with pap-secrets and chap-secrets. The user is also passed
+# on the command line.
+#
+plugin passwordfd.so
+
+noauth
+usepeerdns
+defaultroute
+hide-password
+nodetach
+nopcomp
+novjccomp
+noccp
+
+---snip---
+
+
+
+-------------------------README.STATIC-IP----------------------
+Static IP addresses support with mgetty/autoPPP
+-----------------------------------------------
+
+Debian PPP package includes a variant of ppp-2.3.0-static.diff, a patch to
+ppp-2.3.0 to support using static IP addresses with Mgetty and AutoPPP. It
+does not affect normal dynamic assignments. There is no need to re-compile
+the kernel.
+
+You should update the pap-secrets file to contain the entries of those users
+you want to have static IP addresses. Typical entry might look like:
+
+#client     server     secret     IP addresses
+ jdoe         *        realpswd   207.69.189.15 
+   *          *         ""            *
+ 
+Also, inform your static IP users to include their IP when
+connecting. E.g. run `pppd 207.69.189.15:`
+Or for Windows folks, check the "Specify an IP address" option and
+type in the IP.
+
+Note: The second line is what most folks will use to authenticate
+users who will be dynamically assigned their addresses by 
+/dev/ttyXX. This along with the login option allows users to be PAP
+authenticated against the /etc/passwd or /etc/shadow. If you enter each and
+every user into your pap-secrets file and do not have the last line,
+(wildcards line) you MUST place a "*" at the end of each users line. 
+Without it, the authentication will fail.  For example:
+
+#client     server     secret     IP addresses
+ jdoe         *        passwd     207.69.189.15 *
+
+This "*" at the end allows the patches to work properly without changing
+the normal process.  The IP address is normally assigned via the
+/etc/ppp/options.ttyXX file. The patches do not interfere with this process
+at all. The only thing different is when the user tells pppd he has his own
+address, pppd will allow him to use it, if he and his address are
+authenticated via the pap-secrets file. The only thing to remember, is tell
+your static IP users to set the "correct" IP or they will be assigned the
+normal dynamic address.  (And of course that's not what we want :>) If you
+have any questions....
+
+While I tested this as many ways as our systems would allow, no warranty 
+is implied.  They work well for us.  
+
+Author: Jeff Myers <jmyers@southcom.net>
+
+
+-------------------------README.win9x----------------------
+Short guide on how to run a Win9x connection with PPPD to Debian Linux
+----------------------------------------------------------------------
+
+1. Do not mess around with the Win9x configuration.
+   Do not manually configure DNS, scripts etc.
+   Do not switch on the terminal windows.
+   Accept all defaults or better leave it as it was at installation.
+
+2. You need to have a getty program that supports automatic PPP protocol
+   detection, such as mgetty (versions >= 0.99).
+
+   Note: the mgetty shipped with Debian has to be set up to enable this
+   behaviour - look for "AutoPPP" in the login.config configuration file.
+
+3. Change the "ms-dns" lines in /etc/ppp/options, and review the complete
+   file for things you need to do.
+
+4. Make sure that your /etc/ppp/pap-secrets file is set up to allow users
+   mentioned in system passwords database (/etc/passwd) to establish PPP
+   connections using their normal password.
+
+   Note: the pap-secrets file shipped with Debian pppd is set up to enable
+   this by default.
+
+5. On the Win9x box, in Dial-Up Networking folder, create a new connection,
+   and enter the phone number. Prior to connecting, enter the username and
+   password.
+
+Win9x should connect to your Linux PPPD without problems and automatically
+configure IP addresses, the netmask and the DNS servers. You can immediately
+start Netscape, Internet Explorer or any other TCP/IP tools.
+
+-- Christoph Lameter <clameter@debian.org>, 27 September, 1996,
+   Josip Rodin <jrodin@jagor.srce.hr>, 27 November 1999,
+   Michael Beattie <mjb@debian.org>, 9 April 2001.
+
+
