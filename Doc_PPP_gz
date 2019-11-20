@@ -1,0 +1,3523 @@
+-------------------------changelog.Debian.gz----------------------
+ppp (2.4.7-2+4.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Apply upstream patch from
+    <https://github.com/paulusmack/ppp/commit/3c7b86229f7bd2600d74db14b1fe5b3896be3875>
+    to fix FTBFS with glibc 2.28. (Closes: #916163)
+
+ -- Chris Lamb <lamby@debian.org>  Sat, 09 Mar 2019 14:48:25 +0000
+
+ppp (2.4.7-2+4) unstable; urgency=medium
+
+  * Update EAP-TLS patch to version 1.102. (Closes: #912822)
+
+ -- Chris Boot <bootc@debian.org>  Sun, 04 Nov 2018 12:56:54 +0000
+
+ppp (2.4.7-2+3) unstable; urgency=high
+
+  * Update EAP-TLS patch to version 1.101. (CVE-2018-11574)
+  * Set urgency=high due to security fix.
+
+ -- Chris Boot <bootc@debian.org>  Sat, 09 Jun 2018 14:20:01 +0100
+
+ppp (2.4.7-2+2) unstable; urgency=medium
+
+  * Correct a bug in MS-CHAP authentication introduced in 2.4.7-2+1~exp1 which
+    prevented such authentication from working altogether. (Closes: #891413)
+
+ -- Chris Boot <bootc@debian.org>  Sun, 25 Feb 2018 22:28:25 +0000
+
+ppp (2.4.7-2+1) unstable; urgency=medium
+
+  [ Алексей Шилин ]
+  * debian-installer udeb: use /bin/ip instead of /sbin/ifconfig in the
+    interfaces configuration for the installed system. (Closes: #889295)
+
+  [ Chris Boot ]
+  * Upload to unstable.
+
+ -- Chris Boot <bootc@debian.org>  Sat, 17 Feb 2018 10:19:58 +0000
+
+ppp (2.4.7-2+1~exp1) experimental; urgency=medium
+
+  * Switch to debhelper compat level 11.
+    - Set debian/compat to 11.
+    - Bump Build-Depends on debhelper to >= 11~.
+    - Remove Build-Depends on dh-systemd.
+    - Remove implicit --with systemd from debian/rules.
+    - Switch to dh_installsystemd helper.
+  * Update Standards-Version to 4.1.3:
+    - Remove Priority extra from ppp-dev.
+  * debian/rules: use dpkg helpers for parsing debian/changelog.
+  * Incorporate the EAP-TLS patch for pppd: (Closes: #602503)
+    - debian/patches/eaptls-mppe.patch: add ppp-2.4.7-eaptls-mppe-0.999.patch.
+    - debian/control: add libssl-dev to Build-Depends.
+    - debian/changelog: bump the ABI revision number to account for removed
+      symbols (MD5 now comes from OpenSSL).
+    - debian/rules: don't include EAP-TLS support in the udeb build.
+  * debian/changelog: remove trailing whitepace.
+  * Switch to OpenSSL implementations of MD4, MD5 and SHA1: (Closes: #826625)
+    - debian/patches/replace-vendored-hash-functions.patch: remove embedded
+      crypto code copies, unconditionally link with libcrypto, update
+      includes, amend call sites as required.
+    - debian/ppp.symbols: remove dropped symbols.
+  * Import patches added to upstream Git since the 2.4.7 upstream release,
+    correcting numerous minor bugs. Of note:
+    - 0002-pppd-add-support-for-defaultroute-metric-option.patch: this patch
+      is NOT currently applied due to conflicts with the cifdefroute.dif
+      patch, which adds the replacedefaultroute and noreplacedefaultroute
+      options.
+    - 0013-pppd-allow-use-of-arbitrary-interface-names.patch: upstream import
+      of our ppp-2.4.2-ifname.diff patch.
+    - 0016-pppoe-include-netinet-in.h-before-linux-in.h.patch: upstream patch
+      that replaces our fix-rp-pppoe-ftbfs.patch.
+    - Refreshed 018_ip-up_option.diff and makefiles_cleanup on top of the new
+      patches.
+  * Tweak pon and poff bash-completions files for new versions of
+    bash-completion. (Closes: #882199)
+  * debian/ppp-udeb.postinst: consider interface names using udev predictable
+    interface naming. (Closes: #873391)
+  * d/control: declare that the build requires root.
+  * Move packaging from Alioth to Salsa.
+  * Upload to experimental.
+
+ -- Chris Boot <bootc@debian.org>  Sun, 11 Feb 2018 19:17:06 +0000
+
+ppp (2.4.7-1+4) unstable; urgency=medium
+
+  [ Helmut Grohne ]
+  * Mark ppp-dev Multi-Arch: foreign (Closes: #842890)
+
+  [ Chris Boot ]
+  * Run wrap-and-sort.
+  * ppp: add lsb-base to Depends for pppd-dns init script.
+  * Fix FTBFS in rp-pppoe with linux 4.8 headers.
+
+ -- Chris Boot <bootc@debian.org>  Fri, 11 Nov 2016 15:03:42 +0000
+
+ppp (2.4.7-1+3) unstable; urgency=medium
+
+  * PPPoE: permit setting an arbitrary Host-Uniq field value:
+    add patch pr-28-pppoe-custom-host-uniq-tag.patch (Closes: #828968)
+  * Update Standards-Version to 3.9.8 (no changes required).
+  * Update Vcs-Browser and Vcs-Git to use https:// URLs.
+  * Fix a typo in README.Debian.
+
+ -- Chris Boot <bootc@debian.org>  Mon, 29 Aug 2016 00:15:43 +0100
+
+ppp (2.4.7-1+2) unstable; urgency=medium
+
+  * Replace my email address for my debian.org address.
+  * Upload to unstable.
+
+ -- Chris Boot <bootc@debian.org>  Wed, 27 Jan 2016 08:48:40 +0000
+
+ppp (2.4.7-1+2~exp3) experimental; urgency=medium
+
+  * Remove obsolete conffile /etc/bash_completion.d/pon. (Closes: #807238)
+  * Remove redundant full stop in pppd-dns.service systemd unit file.
+    (Closes: #794348)
+  * Ignore $global$ symbol which appears only on hppa.
+
+ -- Chris Boot <bootc@debian.org>  Wed, 30 Dec 2015 18:16:20 +0000
+
+ppp (2.4.7-1+2~exp2) experimental; urgency=medium
+
+  * Update symbols file to ignore "private" symbols (starting with an
+    underscore) which invariably come from static glibc libraries, along with
+    any symbols with a "version" starting GLIBC_. These don't come from pppd
+    and vary between architectures and glibc versions. Fixes FTBFS on i386 and
+    x32.
+
+ -- Chris Boot <debian@bootc.net>  Sun, 06 Dec 2015 15:43:58 +0000
+
+ppp (2.4.7-1+2~exp1) experimental; urgency=medium
+
+  * Enable "pie" hardening flag.
+  * Add a symbols file for ppp and validate it during builds.
+    - debian/patches/pppd-soname-hack.patch: add a SONAME to pppd so that
+      dpkg-gensymbols will inspect it.
+    - debian/rules: override dh_makeshlibs to inspect pppd and fail hard if
+      the symbols change compared to the symbols file.
+    - debian/ppp.symbols: symbols generated for this version of pppd (on
+      amd64).
+    - debian/README.source: document this unusual setup.
+  * Upload to experimental.
+
+ -- Chris Boot <debian@bootc.net>  Sat, 05 Dec 2015 13:35:51 +0000
+
+ppp (2.4.7-1+1) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Chris Boot <debian@bootc.net>  Fri, 04 Dec 2015 08:18:14 +0000
+
+ppp (2.4.7-1+1~exp2) experimental; urgency=medium
+
+  * Add a --plugin-dir option to dh_ppp that can be used to obtain the path to
+    the ppp plugin directory.
+
+ -- Chris Boot <debian@bootc.net>  Thu, 19 Nov 2015 13:59:17 +0000
+
+ppp (2.4.7-1+1~exp1) experimental; urgency=medium
+
+  * New upstream release.
+  * Remove all of the patches cherry-picked from 2.4.7 upstream.
+  * Update lintian overrides to account for changed plugin path.
+  * Promote myself to the Maintainer field with Marco's approval. Move Marco
+    to the Uploaders field. Thank you for many years spent maintaining this
+    package!
+  * Correct lintian warning maintainer-script-without-set-e in all maintainer
+    scripts.
+  * Switch to debhelper 9, including the command sequencer:
+    - Set debian/compat to 9.
+    - Bump Build-Depends on debhelper to >= 9~.
+    - Rewrite debian/rules.
+    - Use ppp.manpages rather than overriding dh_installman.
+    - Use *.install files rather than copying files; move files around in
+      debian/extra to make this clearer.
+    - Use ppp.examples rather than calling dh_installexamples ourselves.
+  * Remove some very old unused patches from debian/extra/PATCHES.
+  * Update debian/watch (new upstream download URL) and debian/rules
+    get-orig-source target.
+  * Introduce ABI tracking to help packages that build plugins:
+    - Introduce a new ABI version field to the package version number.
+    - Document the version numbering scheme in README.source.
+    - Add dh_ppp script, 'ppp' debhelper addon and /usr/share/ppp-dev/substvars
+      file to help generate Depends or Breaks lines.
+    - Document the debhelper tools in ppp-dev's README.Debian.
+    - At build time, make sure the package's upstream version matches the
+      version in pppd/patchlevel.h, and make sure there is an ABI revision in
+      the package version.
+  * Install pon/poff bash_completion file to
+    /usr/share/bash-completion/completions.
+  * Upload to experimental.
+
+ -- Chris Boot <debian@bootc.net>  Fri, 06 Nov 2015 15:32:25 +0000
+
+ppp (2.4.6-3.1) unstable; urgency=high
+
+  * Non-maintainer upload.
+  * Urgency high due to fix for DoS vulnerability.
+  * Fix buffer overflow in rc_mksid().
+    The function converts the PID of pppd to hex to generate a pseudo-unique
+    string. If the process id is bigger than 65535 (FFFF), its hex
+    representation will be longer than 4 characters, resulting in a buffer
+    overflow. This bug can be exploited to cause a remote DoS.
+    (Closes: #782450)
+
+ -- Emanuele Rocca <ema@debian.org>  Tue, 14 Apr 2015 08:18:06 +0200
+
+ppp (2.4.6-3) unstable; urgency=high
+
+  * Urgency high due to fix for CVE-2014-3158.
+  * Cherry-pick patches from 2.4.7 upstream release. These are 9 of 11 patches
+    in the 2.4.7 upstream release of PPP, including the fix for CVE-2014-3158.
+    The two patches left out were not imported in order to preserve ABI
+    stability. (Closes: #762789)
+    - ppp-2.4.7-001-pppd-Separate-IPv6-handling-for-sifup-sifdown.patch
+    - ppp-2.4.7-002-pppol2tp-Connect-up-down-events-to-notifiers-and-add.patch
+    - ppp-2.4.7-003-pppd-Add-declarations-to-eliminate-compile-warnings.patch
+    - ppp-2.4.7-004-pppd-Eliminate-some-unnecessary-ifdefs.patch
+    - ppp-2.4.7-005-radius-Fix-realms-config-file-option.patch
+    - ppp-2.4.7-006-pppd-Eliminate-potential-integer-overflow-in-option-.patch
+    - ppp-2.4.7-007-pppd-Eliminate-memory-leak-with-multiple-instances-o.patch
+    - ppp-2.4.7-008-pppd-Fix-a-stack-variable-overflow-in-MSCHAP-v2.patch
+    - ppp-2.4.7-009-winbind-plugin-Add-DMPPE-1-to-eliminate-compiler-war.patch
+  * Refresh debian/patches/cifdefroute.dif
+  * Update Standards-Version to 3.9.6 (no changes required).
+
+ -- Chris Boot <debian@bootc.net>  Sun, 19 Oct 2014 10:47:59 +0100
+
+ppp (2.4.6-2) unstable; urgency=medium
+
+  * d/rules: Fix ppp-udeb module path by using a shell expression for PPPDDIR.
+  * Update Breaks for network-manager to (<< 0.9.8.8-7~). (Closes: #744814)
+  * Update Breaks for network-manager-pptp and pppdcapiplugin.
+  * Update lintian overrides to account for changed plugin path.
+
+ -- Chris Boot <debian@bootc.net>  Thu, 17 Apr 2014 22:19:23 +0100
+
+ppp (2.4.6-1) unstable; urgency=medium
+
+  * New upstream release. (Closes: #718873)
+  * Enable GPG signature checking for uscan:
+    - Add pgpsigurlmangle option to debian/watch
+    - Add debian/upstream/signing-key.asc
+    - Remove linitian override for debian-watch-may-check-gpg-signature
+
+ -- Chris Boot <debian@bootc.net>  Sun, 13 Apr 2014 23:22:19 +0100
+
+ppp (2.4.5+git20130610-4) unstable; urgency=medium
+
+  * Remove obsolete --update-rcd-params from dh_installinit. (Closes: #727162)
+  * Remove obsolete Build-Depends on quilt.
+  * Add systemd service file for ppp-dns: (Closes: #716864)
+    - Build-Depend on dh-systemd
+    - Use dh_installinit --name instead of --init-script
+    - Add dh_systemd_enable and dh_systemd_start to debian/rules
+    Thanks to Shawn Landden for providing a patch.
+  * Add LSB Description header to init script.
+  * Make init script source /lib/lsb/init-functions for systemd compatibility.
+  * Override a number of lintian tags:
+    - init.d-script-does-not-implement-optional-option etc/init.d/pppd-dns
+        status
+    - non-standard-dir-perm etc/chatscripts/ and etc/ppp/peers/
+    - package-contains-readme-for-other-platform-or-distro
+        usr/share/doc/ppp/README.win9x
+    - setuid-binary usr/sbin/pppd
+    - debian-watch-may-check-gpg-signature
+    See the lintian overrides files for reasoning.
+  * Add support for arbitrary interface naming: (Closes: #458646)
+    - Add debian/patches/ppp-2.4.2-ifname.diff based on openSUSE patch.
+  * Fix a potential buffer overflow in the radius plugin:
+    - Add debian/patches/ppp-2.4.4-strncatfix.patch from openSUSE.
+  * Update debian/copyright:
+    - Add myself to the list of maintainers
+    - Change reference to GPL symlink license to GPL-2
+  * Update Standards-Version to 3.9.5 (no changes required).
+  * Refresh debian/patches/cifdefroute.dif from OpenSUSE (Closes: #425163) and
+    add patch header.
+
+ -- Chris Boot <debian@bootc.net>  Mon, 27 Jan 2014 22:17:11 +0000
+
+ppp (2.4.5+git20130610-3) unstable; urgency=medium
+
+  * Revisit debian/rules and Makefile patches due to build breakage exposed by
+    the addition of hardening build flags. (Closes: #734458)
+    - Update debian/rules to pass COPTS/LDOPTS instead of CFLAGS/LDFLAGS.
+    - Overhaul makefiles_cleanup patch. This now makes far fewer changes to the
+      upstream Makefiles than previously.
+    - Refresh no_crypt_hack, pppdump_use_zlib, pppoatm_resolver_light and
+      zzz_config patches due to significant Makefile changes.
+    Thanks to Marco d'Itri for the bulk of the Makefile work.
+
+ -- Chris Boot <debian@bootc.net>  Tue, 07 Jan 2014 17:54:08 +0000
+
+ppp (2.4.5+git20130610-2) unstable; urgency=low
+
+  [ David Prévot ]
+  * Add missing prepending underscore in templates. Closes: #686255
+
+  [ Debconf translation updates ]
+  * Chinese — China, Zhi Li.
+  * Chinese — Taiwan, Ｖ字龍.
+  * French, David Prévot.
+  * Turkish, Deniz Bahadır GÜR.
+  * Vietnamese, Nguyễn Vũ Hưng.
+  * Slovak, Slavko (Closes: #686273)
+  * Danish, Joe Hansen (Closes: #686289)
+  * Russian, Yuri Kozlov (Closes: #686354)
+  * Basque, Dooteo (Closes: #686415)
+  * Swedish, Martin Bagge. (Closes: #686443)
+  * Romanian, Andrei Popescu. (Closes: #686556)
+  * Polish, Michał Kułach. (Closes: #686603)
+  * German, Chris Leick. (Closes: #686609)
+  * Dutch, Jeroen Schot. (Closes: #686660)
+  * Portuguese, Carlos Lisboa. (Closes: #686700)
+  * Brazilian Portuguese, J. S. Júnior. (Closes: #686713)
+  * Japanese, victory. (Closes: #686721)
+  * Spanish, Rafael Ernesto Rivas, Javier Fernandez-Sanguino Peña.
+    (Closes: #686722, #686769)
+  * Czech, Michal Šimůnek. (Closes: #687183)
+
+  [ Chris Boot ]
+  * Incorporate David Prévot's debconf translation updates patch from #686255.
+  * Fix lintian warnings:
+    - debian-rules-missing-recommended-target build-arch
+    - debian-rules-missing-recommended-target build-indep
+    - package-would-benefit-from-build-arch-targets
+  * Add radius-config.c-unkown-typo patch to fix spelling-error-in-binary
+    lintian warning.
+  * Add secure-card-interpreter-fix patch to fix
+    example-wrong-path-for-interpreter lintian warning.
+  * Remove always_setsid patch. (Closes: #598551)
+  * Add Vcs-Browser and Vcs-Git fields pointing to collab-maint/pkg-ppp.git.
+  * Enable hardening build flags. (Closes: #658181)
+  * Add dh_lintian to debian/rules so we can use overrides.
+
+ -- Chris Boot <debian@bootc.net>  Mon, 06 Jan 2014 22:05:51 +0000
+
+ppp (2.4.5+git20130610-1) unstable; urgency=low
+
+  * New upstream git snapshot (8d69424). (Closes: #615666, #674207, #684164)
+  * Move extra/ directory into debian/ directory.
+  * Remove patches applied upstream:
+    - git-20100307 (e753795..cab5861)
+    - pppoatm_no_modprobe (52cd43a)
+    - use_system_logwtmp (fixed differently in 9617a7e)
+    - dont-exit-pado-timeout (fixed differently in 225361d)
+    - fix_warnings (fixed in 0b61182)
+    - man_syntax_errors (fixed in d16a398 and a7c3489)
+    - documentation_typos (fixed in 8dea1b9, 9e05a25 and b5b8898)
+    - fix_null_pppdb (3747616)
+    - radius_enanchements (fixed in 2f581cd)
+    - remove-old-version-of-Linux-if_pppol2tp-h.patch (c41092d)
+  * Refresh or edit patches to remove fuzz:
+    - 018_ip-up_option.diff
+    - cifdefroute.dif
+    - no_crypt_hack
+    - setenv_call_file
+    - zzz_config
+  * Remove patches that were disabled in 2.4.5-1:
+    - pppoatm_fix_mtu
+    - pppoe_fixinclude
+  * Add inactive patch to series file added in 2.4.5-1:
+    - ipv6-accept-remote
+  * Switch to dpkg-source 3.0 (quilt) format.
+  * Add Homepage field to debian/control.
+  * Add myself to Uploaders.
+  * Fix lintian warnings:
+    - xc-package-type-in-debian-control line 25
+    - binary-control-field-duplicates-source field "section" in package ppp
+
+ -- Chris Boot <debian@bootc.net>  Mon, 21 Oct 2013 22:49:34 +0100
+
+ppp (2.4.5-5.2) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Replace patch update_if_pppol2tp with
+    remove-old-version-of-Linux-if_pppol2tp-h.patch to fix build failures with
+    kernels since wheezy. (Closes: #707538)
+
+ -- Chris Boot <bootc@bootc.net>  Tue, 28 May 2013 15:56:31 +0100
+
+ppp (2.4.5-5.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Set Architecture to linux-any.  (Closes: #648345)
+
+ -- Robert Millan <rmh@debian.org>  Sun, 22 Apr 2012 16:25:45 +0200
+
+ppp (2.4.5-5) unstable; urgency=medium
+
+  * Updated debconf translation: da. (Closes: #601791)
+
+ -- Marco d'Itri <md@linux.it>  Wed, 19 Jan 2011 23:24:16 +0100
+
+ppp (2.4.5-4) unstable; urgency=low
+
+  * Make sure to actually rebuild pppd for the udeb instead of using the
+    just-built normal binary. (Closes: #591703)
+  * Removed support for IPX from the udeb.
+  * Added patch adaptive_echos: support sending LCP echo requests only if
+    the link is idle. (Closes: #14331)
+  * Updated debconf translation: pt_BR. (Closes: #592155)
+  * Removed the suspend/resume script for the obsolete apmd.
+
+ -- Marco d'Itri <md@linux.it>  Mon, 09 Aug 2010 02:41:04 +0200
+
+ppp (2.4.5-3) unstable; urgency=low
+
+  * Added a Breaks directive to force upgrading the older versions of
+    network-manager, network-manager-pptp and pppdcapiplugin.
+    (Closes: #590087)
+  * Removed patch use_244_plugins because it does not work (pppd also
+    checks the internal plugin version number).
+  * Added patch pppoatm_no_modprobe: nowadays the pppoatm driver can be
+    autoloaded on demand.
+
+ -- Marco d'Itri <md@linux.it>  Sun, 25 Jul 2010 01:50:16 +0200
+
+ppp (2.4.5-2) unstable; urgency=low
+
+  * Refactored again the makefiles to allow overriding CFLAGS/LDFLAGS
+    in the environment. (Closes: #589664)
+  * Added patch use_244_plugins: check for the plugins in
+    /usr/lib/pppd/2.4.4/ too.
+
+ -- Marco d'Itri <md@linux.it>  Tue, 20 Jul 2010 01:40:37 +0200
+
+ppp (2.4.5-1) unstable; urgency=low
+
+  * New upstream release. (Closes: #515590)
+    + Fix authentication on second time around with multilink and persist.
+      (Closes: #377670)
+    + Increase default IPCP Conf-Nak limit. (Closes: #445711, #445951)
+  * Added patch git-20100307 with the upstream changes since the release.
+  * Removed the following patches which have been merged upstream:
+    pppoe_cleanup, pppoe_fixinclude, fix_close_fd0, fix_mschapv2_ppp.
+  * Removed patch pppoatm_fix_mtu since the affected code has been removed.
+  * Added patch radius_enanchements.
+  * Added patch always_setsid: always create a new process group.
+  * Added patch ipv6-accept-remote from Fedora.
+  * Added patch dont-exit-pado-timeout to prevent pppd persist from
+    exiting in the event of a PPPoE PADO timeout. (Closes: #377987)
+  * Added patch update_if_pppol2tp: update include/linux/if_pppol2tp.h to
+    match current kernel definitions, from Ubuntu. (LP: #600947)
+  * Added a simple example configuration for mobile connectsions.
+  * proxyarp is now disabled by default in /etc/ppp/options. (Closes: #388712)
+  * Use $@ instead of $* in the link scripts. (Closes: #437339)
+  * Correctly restart pppoe-discovery in the udeb. (Patch by alexander
+    barakin.) (Closes: #582035)
+  * Backup resolv.conf with interface-specific file names to better support
+    multilink. (Patch by alex samad). (Closes: #584318)
+  * Allow the nostrip option to work. (Closes: #437789)
+  * Updated debconf translation: pt_BR, tr. (Closes: #577799, #509200)
+  * Packaging converted to quilt. (Closes: #482699)
+
+ -- Marco d'Itri <md@linux.it>  Mon, 19 Jul 2010 01:00:53 +0200
+
+ppp (2.4.4rel-10.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Fix pending l10n issues. Debconf translations:
+    - Traditional Chinese. Closes: #505952
+    - Catalan. Closes: #506336
+    - Swedish. Closes: #491421
+    - Japanese. Closes: #489333
+    - Polish. Closes: #506852
+    - Belarusian. Closes: #506927
+
+ -- Christian Perrier <bubulle@debian.org>  Fri, 28 Nov 2008 18:36:26 +0100
+
+ppp (2.4.4rel-10) unstable; urgency=low
+
+   * ppp-udeb: allow for preseeding of the netcfg/get_hostname template.
+     Closes: #455366.
+   * ppp-udeb: also ask for a domain name to be used in /etc/hosts.
+     Closes: #475032.
+   * ppp-udeb: switch from using 'ifconfig' to 'ip' because the former is no
+     longer included in busybox-udeb. Closes: #451446.
+   * Handle the setting of fallback DNS in ppp-udeb. Those are set by
+     preseeding netcfg/get_nameservers. Thanks to Jérémy Bobbio for the patch.
+     Closes: #473782.
+   * Add new translation for Belarussian. Closes: #447116.
+   * Fix LSB header in init.d script. Closes: #466273.
+   * Add myself as uploader with Marco's blessing.
+
+   [ Christian Perrier ]
+   * Debconf templates and debian/control reviewed by the debian-l10n-english
+     team as part of the Smith review project. Closes: #447329
+
+   [Debconf translation updates]
+   * Vietnamese. Closes: #447847, #426870
+   * German. Closes: #447902
+   * Galician. Closes: #447917
+   * Romanian. Closes: #447918
+   * Basque. Closes: #447994
+   * Finnish. Closes: #448301
+   * Spanish. Closes: #448542
+   * Dutch. Closes: #449022
+   * Czech. Closes: #449261
+   * Russian. Closes: #450517
+   * Portuguese. Closes: #450544
+   * French. Closes: #450702
+   * Norwegian Bokmål; Bokmål, Norwegian. Closes: #450724
+
+ -- Frans Pop <fjp@debian.org>  Tue, 08 Apr 2008 16:53:04 +0200
+
+ppp (2.4.4rel-9) unstable; urgency=low
+
+  * ppp-udeb: quote username and password in pap/chap secrets since they
+    might contain special characters. (Closes: #418284)
+  * ppp-udeb: multiply by 100 the XB-Installer-Menu-Item due to renumbering in
+    Debian Installer
+
+ -- Eddy Petrișor <eddy.petrisor@gmail.com>  Tue, 10 Apr 2007 23:11:10 +0300
+
+ppp (2.4.4rel-8) unstable; urgency=high
+
+  * urgency high since fixes an RC bug
+  * make sure the /etc/resolv.conf file is world readable (Closes: #415077)
+
+ -- Eddy Petrișor <eddy.petrisor@gmail.com>  Sat, 17 Mar 2007 22:31:45 +0200
+
+ppp (2.4.4rel-7) unstable; urgency=high
+
+  * urgency set to high to catch the RC2 release
+  * Updated translations: pt_BR  (Closes: #411544)
+
+ -- Eddy Petrișor <eddy.petrisor@gmail.com>  Sun,  4 Mar 2007 17:59:00 +0200
+
+ppp (2.4.4rel-6) unstable; urgency=low
+
+  * Updated translations: da, it, es
+    (Closes: #409479, #410326)
+  * New translations:
+    - Basque, thanks to Piarres Beobide <pi@beobide.net>
+    - Catalan, thanks to Jordà Polo <jorda@ettin.org> (closes: 410215)
+
+ -- Eddy Petrișor <eddy.petrisor@gmail.com>  Mon, 12 Feb 2007 17:36:46 +0200
+
+ppp (2.4.4rel-5) unstable; urgency=low
+
+  [ Eddy Petrișor ]
+  * added ${misc:Depends} to ppp-udeb
+  * removed debconf as a dependency of ppp-udeb since such a package does not
+    exist in d-i environment
+  * ppp-udeb: the interface is now brought up in the installed system
+    (Closes: #402450, #406231)
+  * ppp-udeb: loopback interface snippet is added too, to make sure we have it
+    in the installed system
+  * ppp-udeb: added error handling if the wrong login info is sent or other
+    error is returned while calling the provider
+  * ppp-udeb: after triggering the connection wait to see if the connection is
+    actually done, don't assume everything went fine
+  * make a PID file in /var/run/ppp-udeb.pid to be able to kill the right
+    process later (pppd creates one only after a succesful installation)
+  * Added myself to Uploaders with maintainer's consent.
+  * Updated po-debconf translations: sv, ru, cs, de, ro, fr, nl, ja, pt
+    (Closes: #406993, #408004, #407684)
+  * Added po-debconf translations:
+    - Tamil (ta), thanks to Tirumurti Vasudevan
+    - Norwegian Bokmål (nb), thanks to Hans F. Nordhaug
+    - Galician (gl), thanks to Jacobo Tarrio (Closes: #407893)
+  * ppp-udeb: use "|| exit 10" for password and username as suggested by Frans
+  * ppp-udeb: add the possibility to go back to menu (thanks to Frans for the
+    hint)
+  * added a new template for the progress bar while waiting to connect;
+    imported entirely (including translations) from partman
+  * updated ppp-udeb.todo (only integration with netcfg remains)
+  * s/Type: progress/Type: text/ in ppp-udeb.templates, it seems I was on some
+    kind of crack when I said the type is progress
+
+  [ Frans Pop ]
+  * ppp-udeb: general review resulting in some corrections and restructuring
+  * ppp-udeb: set up loopback interface in installer environment
+  * ppp-udeb: ask for hostname and check validity (using netcfg template)
+  * ppp-udeb: create /etc/hostname and basic /etc/hosts files
+
+ -- Eddy Petrișor <eddy.petrisor@gmail.com>  Mon, 29 Jan 2007 16:58:03 +0200
+
+ppp (2.4.4rel-4.1) unstable; urgency=low
+
+  * Non-maintainer upload with maintainer's consent.
+  * New patch fix_mschapv2_ppp which makes ppp works with mschapv2. Thanks
+    to Guillaume Knispel <gknispel@proformatique.com>. Closes: #381420.
+  * Add hints section to README.pppoe (pppoe_readme patch) and iptables to
+    Suggests. Thanks to Joerg Dorchain <joerg@dorchain.net>. Closes: #251918.
+  * Improve the chat manpage concerning timeout (chap_man patch).
+    Closes: #320494.
+
+ -- Arnaud Fontaine <arnaud@andesi.org>  Thu, 14 Dec 2006 21:31:55 +0100
+
+ppp (2.4.4rel-4) unstable; urgency=low
+
+  [ Eddy Petrișor ]
+  * Using provider as the pppoe profile name in ppp-udeb so that the
+    connection starts after reboot and to integrate better with ppp helpers.
+  * Implemented idempotency in ppp-udeb by following the pid file generated
+    by pppd and bringing down interfaces which were rised by ppp-udeb.
+  * Improved some conditions which were problematic in concentrator detection.
+  * Deal elegantly with resolv.conf when using peer dns in ppp-udeb.
+  * Really detect if the interfaces were raised before ppp-udeb probed.
+  * Added a ppp-udeb.dirs file.
+  * Revert the gratuitous type change to "note" for ppp/detect_progress.
+    (Closes: #395197)
+  * Fix some mistakes in ppp-udeb.postinst which could have caused some of the
+    strange issues seen during early tests. (Closes: #395187)
+  * Updated debconf translation: ro.
+
+  [ Marco d'Itri ]
+  * Pass the command line arguments to the ip*-{up,down} scripts.
+    (Closes: #378810)
+  * Updated debconf translations: de, ru. (Closes: #396035, #397169)
+  * Improved bash completion. (Closes: #397037)
+
+ -- Marco d'Itri <md@linux.it>  Tue, 14 Nov 2006 12:52:29 +0100
+
+ppp (2.4.4rel-3) unstable; urgency=medium
+
+  [ Luk Claes ]
+  * Add a Provides entry in the LSB type header (Closes: #386387).
+  * Updated debconf translations: ro, fr, es, cs, nl, sv, ja.
+    (Closes: #377672, #384191, #378636, #380529, #384875, #386769)
+    (Closes: #387028, #390489).
+  * Fix PPPDIR (Closes: #384121, #392858).
+
+  [ Eddy Petrişor ]
+  * Sanitise debconf output for udeb (Closes: #385150).
+    - don't use db_stop in ppp-udeb.postinst.
+    - give ppp-udeb priority 17 in the menu so it runs before netcfg.
+    - don't fail when ppp is queued for installation (by apt-install).
+
+  [ Marco d'Itri ]
+  * Stop linking pppdump with zlib since it's not used.
+
+ -- Marco d'Itri <md@linux.it>  Sun, 22 Oct 2006 23:16:56 +0200
+
+ppp (2.4.4rel-2) unstable; urgency=high
+
+  * Make postinst not fail if /dev/MAKEDEV does not exist yet.
+    (Closes: #325650)
+  * Update debconf translation: da. (Closes: #377672)
+
+ -- Marco d'Itri <md@linux.it>  Wed, 12 Jul 2006 18:26:01 +0200
+
+ppp (2.4.4rel-1) unstable; urgency=high
+
+  * New upstream release. Fixes:
+    + privilege escalation in the winbind plugin (CVE-2006-2194).
+    + SHA-1 on some architectures. (Closes: #368419)
+  * Merged many ppp-udeb improvements and fixes by Eddy Petrişor.
+  * Updated patch pppoatm_cleanup: added T2A_WILDCARD. (Closes: #376990)
+  * Added the pppoe-discovery(8) man page, contributed by Ben Hutchings.
+    (Closes: #333144)
+  * Added new debconf translations: it, ro. (Closes: #358162)
+  * Conflict on old makedev versions instead of depending on recent ones.
+  * Finally remove the deprecated /etc/init.d/ppp script.
+
+ -- Marco d'Itri <md@linux.it>  Sun,  9 Jul 2006 18:38:54 +0200
+
+ppp (2.4.4b1-1) unstable; urgency=low
+
+  * New upstream release. Fixes:
+    + pass-filter configuration option. (Closes: #309214)
+    + LCP FSM bugs causing reconnection problems.
+      (Closes: #298657, #312118, #313205)
+    + pty fd leaks. (Closes: #276550, #310292, #310293, #325705, #330444)
+  * Removed the following patches which have been merged upstream:
+    060_mppe-negotiation-fix, fix_winbind_base64, man_clarify_call,
+    multicast_pado, pcap, pcap_fixactive, proc_net_ipx.
+  * Updated cifdefroute.dif for the new code, hopefully it still works.
+  * Document that pon -q is only available to root. (Closes: #337431)
+  * Removed the patch pppdump-no-deflate to enable again deflate support
+    in pppdump. (See #144368 for details.)
+  * Added patch pppoe_all_if (SuSE patch ppp-2.4.3-all-ethernet.diff) to
+    accept any interface name in the PPPoE plugin. (Closes: #310672)
+  * Added new debconf translations: vi, sv, pt_PT.
+    (Closes: #317127, #331580, #336934)
+  * Added patch fix_null_pppdb to prevent a segfault when the call option
+    is used more than once, by Martin Lottermoser. (Closes: #308136)
+  * Added patch fix_close_fd0 to prevent closing fd 0, by Alan Curry.
+    (Closes: #298582)
+  * Added patch readable_connerrs to make ppp-connect-errors world
+    readable. (Closes: #341853)
+  * Fixes typos in pap-secrets and options.ttyXX. (Closes: #332659)
+  * Copy all the headers in ppp-dev. (Closes: #325815)
+
+ -- Marco d'Itri <md@linux.it>  Sun,  4 Dec 2005 15:22:23 +0100
+
+ppp (2.4.3-20050321+2) unstable; urgency=high
+
+  * Added patch close_dev_ppp to fix pppd spinning on select() and using
+    all file descriptors. By Simon Peter. (Closes: #306261)
+  * Added patch pppoatm_fix_mtu to fix the mtu option when used with the
+    pppoatm plugin. From the Red Hat package.
+  * Added patch fix_winbind_base64 to fix login names incorrectly encoded
+    by the winbind plugin.
+  * Added patch zzz_man_typos to fix some typos in man pages. By A. Costa.
+    (Closes: #301928, #302674)
+  * Removed patch pppoatm-no-modprobe to not diverge from other distributions.
+  * Log the arguments to ip-up and ip-down. (Closes: #305473)
+
+ -- Marco d'Itri <md@linux.it>  Wed,  4 May 2005 02:00:04 +0200
+
+ppp (2.4.3-20050321+1) unstable; urgency=high
+
+  * New upstream snapshot, with a fix for the persist configuration option.
+    (Closes: #298657, #301018)
+  * Removed redundant options from the example peers files.
+
+ -- Marco d'Itri <md@linux.it>  Thu, 24 Mar 2005 12:37:55 +0100
+
+ppp (2.4.3-20041231+3) unstable; urgency=medium
+
+  * Added patch pppoatm_cleanup: removes some debug messages.
+  * Added patch pppoe_cleanup: big error handling cleanup for the pppoe
+    plugin. (Closes: #297515)
+  * Added patch pcap_fixactive to fix the active-filter option, by
+    Michael Guntsche. (Closes: #299668)
+  * Fixed the #287861 fix of the bash completion script. (Closes: #297209)
+  * Updated the peers-pppoa example file. (Closes: #278823)
+  * Added an example interfaces(5) file.
+  * Updated README.Debian and changed the default peers file to use PAP.
+
+ -- Marco d'Itri <md@linux.it>  Sat, 19 Mar 2005 17:34:50 +0100
+
+ppp (2.4.3-20041231+2) unstable; urgency=low
+
+  * Build-Depend on zlib1g-dev.
+
+ -- Marco d'Itri <md@linux.it>  Sat, 26 Feb 2005 21:14:07 +0100
+
+ppp (2.4.3-20041231+1) unstable; urgency=low
+
+  * New upstream release and fixes from CVS. (Closes: #282737, #294232)
+  * Removed patch 057_pppoe-interface-change which was refused by the
+    upstream maintainer. Now users must arrange for the ethernet
+    interface used for PPPoE to be up. (Closes: #279135)
+  * Removed the following patches which have been merged upstream:
+    040_pppoatm.diff fail_on_ipcp_addr_confnak mppe_unaligned
+    041_pppoatm-disconnection fix_closed_fds pppoe_discovery
+    042_pppoatm-libatm-workaround fix_holdoff zz_fix_nroff_hypens
+    close_devfd fix_man_email.
+  * Do not print an error message on package removal if no pppd process
+    running. (Closes: #295561)
+  * Improved the bash completions script. (Closes: #287861)
+  * New patch multicast_pado makes the pppoe plugin accept PADO packets
+    sent from multicast addresses. (See #293811.)
+  * New patch mppe-negotiation-fix fixes unencrypted MPPE connections.
+    (Closes: #294232)
+  * New patch pppdump_use_zlib properly compiles pppdump and makes it
+    use the system zlib.
+  * Removed patch use_openssl because it's not needed anymore.
+  * New patch atm_resolver_light disables some code not commonly used
+    in the built-in ATM names resolver library of the pppoatm plugin.
+    Linking with libatm has been disabled and the plugin has been added
+    to ppp-udeb.
+  * Build the RADIUS plugins. (Closes: #214053)
+  * Updated the copyright file.
+  * Added an example PPPoA peers file.
+
+ -- Marco d'Itri <md@linux.it>  Thu, 24 Feb 2005 23:51:54 +0100
+
+ppp (2.4.2+20040428-6) unstable; urgency=medium
+
+  * Removed references to nscd from the 0000usepeerdns scripts.
+    If you use it for DNS caching (don't!) you will have to manually
+    arrange for it to be restarted or use resolvconf. (Closes: #281359)
+  * Updated patch proc_net_ipx: fixed IPX support for 2.4 kernels.
+    (Spotted by Steve Langasek, Closes: #278082)
+  * New patch fix_linkpidfile fixes the option linkpidfile, by Herbert Xu.
+    (Closes: #284382)
+  * New patch fix_man_email fixes paulus' email address in pppd(8).
+    (Closes: #285380)
+  * Made the init script print a big warning about being deprecated.
+  * New patch resolv.conf_no_log: do not log an error if resolv.conf is
+    not writeable, because the usepeerdns option is needed anyway to
+    request the DNS addresses. (Closes: #281438)
+
+ -- Marco d'Itri <md@linux.it>  Thu, 30 Dec 2004 17:21:22 +0100
+
+ppp (2.4.2+20040428-5) unstable; urgency=medium
+
+  * Removed patch pty_command_timeout. (Closes: #279929)
+  * New patch man_clarify_call clarifies pppd.8. (Closes: #279947)
+  * New patch fix_nroff_hypens correctly escapes or unescapes hyphens in
+    man pages.
+
+ -- Marco d'Itri <md@linux.it>  Mon,  8 Nov 2004 12:47:01 +0100
+
+ppp (2.4.2+20040428-4) unstable; urgency=medium
+
+  * Updated patch pty_command_timeout, which broke the pty command.
+    [A reminder for people still using the pppoe package: you should
+    switch to the kernel driver and use the rp-pppoe.so pppd plugin.]
+    (Closes: #279125)
+
+ -- Marco d'Itri <md@linux.it>  Tue,  2 Nov 2004 16:20:17 +0100
+
+ppp (2.4.2+20040428-3) unstable; urgency=low
+
+  * New patch partial-20041018.diff merges some bug fixes from CVS.
+    Fixes possible overflows in the CBCP code. (Closes: #278649)
+  * Removed patch auth_hook_segfault, merged upstream.
+  * New patch proc_net_ipx fixes the path of /proc/net/ipx/interface,
+    by Christian Homagk. (Closes: #278082)
+  * New patch mppe_unaligned fixes unaligned accesses in the MPPE code,
+    by Holger Hans Peter Freyther. (Closes: #273828)
+  * New patch fix_holdoff lets holdoff work when the pty option is
+    present, by Herbert Xu. (Closes: #265166)
+  * New patch fail_on_ipcp_addr_confnak makes pppd shut down the session
+    if the peers cannot agree on the IP addresses to be used, by Herbert Xu.
+    (Closes: #167691, #264959)
+  * Added to README.Debian a reminder about /etc/ppp/ppp_on_boot for the
+    benefit of lusers who configure pppd to start two times. (Closes: #269824)
+  * Added to README.Debian notes about MSS clamping and PPPoE interface names.
+    (Closes: #278014)
+  * Set the $PPP_* variables in ipv6-{up,down} too. (Closes: #274040)
+  * New patch pty_command_timeout kills the pty command when the session
+    is closed, by Pedro Zorzenon Neto. (Closes: #227899)
+
+ -- Marco d'Itri <md@linux.it>  Sun, 31 Oct 2004 16:02:19 +0100
+
+ppp (2.4.2+20040428-2) unstable; urgency=medium
+
+  * Temporarily removed patch ppp-2.4.2-libpcap.diff: switch back to
+    libpcap0.7-dev, because 0.8 is not in base and will not be before
+    the release. (Closes: #259643)
+  * New patch pppoe_discovery adds the pppoe-discovery program.
+
+ -- Marco d'Itri <md@linux.it>  Fri, 16 Jul 2004 19:28:09 +0200
+
+ppp (2.4.2+20040428-1) unstable; urgency=medium
+
+  * Updated patch use_openssl to fix MD4. (Closes: #259192)
+  * New debconf translation: da.po (Closes: #259397)
+  * New source upload to have a correct diff.
+
+ -- Marco d'Itri <md@linux.it>  Wed, 14 Jul 2004 16:47:37 +0200
+
+ppp (2.4.2+20040427-1) unstable; urgency=medium
+
+  * Updated patch 018_ip-up_option.diff to fix the default ip-down path.
+    (Closes: #258199)
+  * New patch use_openssl: use OpenSSL instead of the built-in SHA1/MD4/MD5
+    implementations, because SHA1 is broken on 64 bit systems.
+  * New patch ppp-2.4.2-libpcap.diff: API changes needed by libpcap 0.8,
+    from the SuSE package.
+  * New patch auth_hook_segfault, by Michael Tokarev.
+  * New patch close_devfd: do not pass the connection fd to childs.
+  * New debconf translations: cs, de, pt_BR, es.
+    (Closes: #244365, #252573, #254111, #254562)
+  * Removed pam cleanups from preinst, upgrading from versions < 2.3.11-1.1
+    is not supported anymore.
+
+ -- Marco d'Itri <md@linux.it>  Mon, 12 Jul 2004 15:48:20 +0200
+
+ppp (2.4.2+20040202-3) unstable; urgency=medium
+
+  * Fixed the dependencies of ppp-udeb/ppp-dev. (Closes: #243774)
+  * New debconf translation: tr. (Closes: #243684)
+  * Added ipv6-{up,down} scripts. (Closes: #243330)
+
+ -- Marco d'Itri <md@linux.it>  Thu, 15 Apr 2004 19:53:16 +0200
+
+ppp (2.4.2+20040202-2) unstable; urgency=medium
+
+  * Enabled the postinst script in ppp-udeb, now it should be almost
+    useful.
+  * Add a workaround to the 0000usepeerdns scripts to not fail if
+    /etc/resolv.conf does not exist. (Closes: #235583)
+  * Added new debconf translations: fr, nl, ja.
+    (Closes: #236726, #239458, #237176)
+  * Fixed *again* the $PID regexp in poff, to be compatible with mawk.
+    (Closes: #238667, #239766)
+
+ -- Marco d'Itri <md@linux.it>  Sun, 11 Apr 2004 16:22:24 +0200
+
+ppp (2.4.2+20040202-1) unstable; urgency=medium
+
+  * New upstream release, with updates from CVS. (Closes: #102876)
+  * Patches removed because they have been merged upstream:
+    009_SETUP.diff 012_secure-card.diff 053_pppoe-fix-persist
+    054_pppoe-no-dead-code 055_pppoe-update-3.5 056_pppoe-nas-tap
+    devnam_path disable_evil_slprintf_r makefiles_use_copts
+    parisc_eagain_fix peerdns-env-always ppp-2.4.0-ttyperms.dif
+    pppd.8-filters warning_ipv6cp.
+  * Removed patch 005_fsm.c.diff, the upstream author thinks it violates
+    RFC1661.
+  * Removed patch 006_ipcp.c.diff, it appears to be useless.
+  * Fixed the $PID regexp in poff. (Closes: #219442, #225443)
+  * Use mv -f in 0000usepeerdns. (Closes: #225792)
+  * Added debian/po/. (Closes: #233758)
+  * New patch fix_closed_fds: make sure that fd numbers 0, 1 and 2 are not
+    used for a socket. (Closes: #235192)
+
+ -- Marco d'Itri <md@linux.it>  Sun, 29 Feb 2004 18:54:34 +0100
+
+ppp (2.4.2+20031127-2) unstable; urgency=medium
+
+  * New upstream snapshot, only documentation changes.
+  * New patch pppoe-nas-tap: make the pppoe plugin accept nas and tap
+    devices too, from Carlos Fonseca. (Closes: #221759)
+  * New patch pppoe-interface-up: make the pppoe plugin set the interface up.
+    (Closes: #222558)
+  * Do not make 0000usepeerdns-up fail if resolv.conf is empty.
+    (Closes: #221121)
+  * Removed patch use_system_logwtmp: it breaks utmp updates.
+    (Closes: #222261)
+  * Resurrected ppp.udeb.
+  * Removed patch: ppp-2.4.1-MSCHAPv2-fix.patch (was applied to dead code).
+  * New patch: ppp-2.4.2-stripMSdomain (I ported the old patch to the new
+    CHAP code).
+  * New patch: no_crypt_hack, because the d-i libc does not have crypt(3).
+  * Clean up the APM script. (Closes: #222008, #222436)
+  * New patch: parisc_eagain_fix to fix the EAGAIN != EWOULDBLOCK bug on
+    parisc, by James Bottomley. (Closes: #224982)
+
+ -- Marco d'Itri <md@linux.it>  Thu,  4 Dec 2003 11:54:35 +0100
+
+ppp (2.4.2+20031002-4) unstable; urgency=medium
+
+  * Deprecate /etc/ppp/ppp_on_boot in favour of ifupdown.
+  * Added /etc/apm/event.d/ppp to support APM. (Closes: #217821)
+  * Remove the logrotate entry for ppp.log, as syslog daemons manage
+    logging by themselves. (Closes: #216786, #217190)
+  * Add documentation about setting the default route. (Closes: #85426)
+
+ -- Marco d'Itri <md@linux.it>  Thu, 30 Oct 2003 21:04:15 +0100
+
+ppp (2.4.2+20031002-3) unstable; urgency=medium
+
+  * New patch 043_pppoatm-no-modprobe: do not run modprobe inside pppd.
+  * Removed the run-parts --report option from ip-{up,down} because it
+    caused it to wait for childs. (Closes: #214473)
+  * Suggests: libatm1. (Closes: #215874)
+  * Allow / in the poff parameter. (Closes: #215972)
+  * New example file per-linkname, from Eyal Rozenberg.
+
+ -- Marco d'Itri <md@linux.it>  Sat, 18 Oct 2003 12:34:26 +0200
+
+ppp (2.4.2+20031002-2) unstable; urgency=medium
+
+  * Fixed poff regexp. (Closes: #214051)
+
+ -- Marco d'Itri <md@linux.it>  Mon,  6 Oct 2003 20:21:10 +0200
+
+ppp (2.4.2+20031002-1) unstable; urgency=low
+
+  * Fresh CVS checkout.
+  * Removed the part of 040_pppoatm.diff which added a remove_option
+    member to struct protent in pppd.h. This has no apparent meaning
+    and breaks many other users of protent, like IPCP.
+    Debugged by Benjamin Heuer. (Closes: #213352)
+  * Conflict with incompatible versions of pppdcapiplugin. (Closes: #213217)
+
+ -- Marco d'Itri <md@linux.it>  Tue, 30 Sep 2003 23:06:12 +0200
+
+ppp (2.4.2+20030811-6) unstable; urgency=low
+
+  * Fix run-parts call in ip-{up,down}. (Closes: #213059)
+  * Removed ppp.udeb because it's apparently useless.
+  * New patch 042_pppoatm-libatm-workaround: work around a bug in
+    libatm1-dev which caused libatm.a to be statically linked (see #213146).
+    Now libatm1 needs to be installed if this plugin is used.
+  * Some obsolete information has been removed from README.Debian.
+
+ -- Marco d'Itri <md@linux.it>  Sun, 28 Sep 2003 19:48:32 +0200
+
+ppp (2.4.2+20030811-5) unstable; urgency=low
+
+  * Fix usage of ps in poff. (Closes: #58896)
+  * Add an example configuration file for the pppoe plugin.
+  * New patch pppoe-no-dead-code: disable some dead code in the pppoe plugin.
+  * Close the bugs fixed in the releases uploaded to experimental.
+    (Closes: #101616, #157214, #173546, #183221, #197489, #61717, #155668)
+    (Closes: #148156, #133809, #137964, #52913, #81511, #100665, #171137)
+    (Closes: #75797, #211485, #162163, #209146)
+
+ -- Marco d'Itri <md@linux.it>  Sat, 27 Sep 2003 16:05:49 +0200
+
+ppp (2.4.2+20030811-4) experimental; urgency=low
+
+  * New patch peerdns-env-always: always set $DNS1 and $DNS2 if name
+    server addresses are received with IPCP. (Closes: #209146)
+  * New patch pppoe-fix-persist: fixes the persist option, but watch
+    for side effects.
+  * Improved the parsing of the device name when / is a ramdisk.
+    (Closes: #162163)
+  * Build-Depend on a newer debhelper. (Closes: #211485)
+  * Renamed the pppoatm* patches because DBS is sensible to $LC_COLLATE.
+  * Updated the pppoe plugin with a fix from rp-pppoe 3.5.
+
+ -- Marco d'Itri <md@linux.it>  Sat, 20 Sep 2003 18:00:44 +0200
+
+ppp (2.4.2+20030811-3) experimental; urgency=low
+
+  * Add --report and $@ to the run-parts command line in ip-{up,down}.
+    (Suggestions from Dan Jacobson, Closes: #209133)
+  * Move /etc/ppp/options.ttyXX to /usr/share/doc/ppp/, it's documentation.
+    (Closes: #209275)
+  * Remove from postinst some compatibility code introduced in 2.3b3-2,
+    2.3.5-2 and 2.3.6-1.
+  * Change the serial device permissions only when really needed.
+    Patch ppp-2.4.0-ttyperms.dif from the SuSE package.
+    (Closes: #22284, #36789, #51974, #62567, #74789)
+  * Use the system logwtmp() function. From the Red Hat and SuSE packages.
+  * Add the pppoatm-disconnection patch. From the Mandrake package.
+  * Add an example active-filter from the SuSE package.
+  * Add ppp-2.4.1-stripMSdomain.patch and ppp-2.4.1-MSCHAPv2-fix.patch
+    from the SuSE package. They say that these patches are described at
+    http://www.heise.de/ct/Redaktion/ps/pptp.html, but I don't know german.
+    I also don't use MSCHAP or MPPE, so I do not know if they will work.
+    Please report any success or insuccess of MPPE and related features.
+  * Add ppp-2.3.11-oedod.dif from the SuSE package to fix dial on demand
+    with sync PPP. (Closes: #75797)
+
+ -- Marco d'Itri <md@linux.it>  Sun, 14 Sep 2003 12:48:02 +0200
+
+ppp (2.4.2+20030811-2) experimental; urgency=low
+
+  * I'm the new maintainer.
+  * Fix FTBFS bug on S/390.
+  * Add a copy of chap-secrets to install. (#207417)
+  * Fix a little pon bug. (#207442)
+  * Clarify the active-filter description in pppd(8). (#207023)
+  * Make some files readable again by group dip. (#207407)
+  * Link pppoatm.so with libresolv. PPP over ATM has been reported to work.
+
+ -- Marco d'Itri <md@linux.it>  Wed, 27 Aug 2003 15:30:16 +0200
+
+ppp (2.4.2+20030811-1) experimental; urgency=low
+
+  * New CVS snapshot. (Closes: #171137)
+    New features:
+    - MPPE (Closes: #52913, #81511, #100665)
+    - kernel space PPPoE (Closes: #133809, #137964)
+    - CBCP (Closes: #148156)
+    - CHAP hooks for plugins (Closes: #155668)
+    - misc fixes (Closes: #61717)
+  * The following patches have been merged upstream:
+    002_chat.c.diff 003_cbcp.diff 004_auth.c.diff 016_chat_manpage.diff
+    017_memory_management.diff 020_IPPROTO_TCP_undefine.diff
+    021_setipaddr.diff 022_lockfile-fix.diff 023_lcp-max-termintate.diff
+    024_pppd.8-persist-maxfail.diff 025_packet_count.diff
+    026_pppd.8-active-filter.diff 027_child_debugging.diff
+    028_options_segv.diff 029_chap_plugin.diff 030_more_minor_warnings.diff
+    031_ipv6cp-use-persistent.diff 032_flush_fd.diff etc_networks pppd.8
+    pppiocdetach (?) reset-sigpipe (?)
+  * Added the PPP over ATM patch from
+    http://linux-usb.sourceforge.net/SpeedTouch/. Untested!
+    (Closes: #101616, #157214, #173546, #183221, #197489)
+
+ -- Marco d'Itri <md@linux.it>  Sun, 24 Aug 2003 13:40:16 +0200
+
+ppp (2.4.1.uus2-3) unstable; urgency=low
+
+  * Fix error in postinst. (Closes: #206978)
+
+ -- Marco d'Itri <md@linux.it>  Sun, 24 Aug 2003 13:23:01 +0200
+
+ppp (2.4.1.uus2-2) unstable; urgency=low
+
+  * New co-maintainer. (Closes: #180720)
+  * Switch to DBS.
+  * PAM configuration updated to the new style.
+  * Stop deleting /etc/ppp/* on purge, this is evil. (Closes: #202680)
+  * Kill pppd at K86 instead of K14. (Closes: #200639)
+  * Add a generic chatscript for PAP/CHAP sites. (Closes: #182107)
+  * Add a newline at the end of /etc/pam.d/ppp. (Closes: #182103)
+  * Add two ip-{up,down} scripts to support usepeerdns and the resolvconf
+    package. (Closes: #187756, #203243)
+  * Add a patch from Herbert Xu to fix the PPPIOCDETACH bug. This is
+    not the same bug of "Inappropriate ioctl for device(25)".
+    (Closes: #172317, #175480)
+  * 2.0 kernels are not supported by debian, remove kernel.fix-2.0.30-2.
+    (Closes: #171200)
+  * Add bash completion script. (Closes: #170771)
+  * Restore SIGPIPE for childs (Herbert Xu). (Closes: #169697)
+  * Fix the holdoff option (Herbert Xu). (Closes: #128875, #169694)
+  * Add a logrotate file. (Closes: #162895)
+  * Make pon print an error message if the user is not in the dip group.
+    (Closes: #156672)
+  * Improve the ability of poff of finding the right process.
+    (Closes: #160169)
+  * Remove deflate support from pppdump, just to be sure. (Closes: #144368)
+  * Use poff -a at shutdown time. (Closes: #140587)
+  * Add the popp example script from Tomas Pospisek. (Closes: #130716)
+  * Clarify pon(1). (Closes: #126656)
+  * Fix the code which reads /etc/networks/ (Closes: #125697)
+  * Add support for /var/log/ppp-ipupdown.log. (Closes: #152398)
+  * Add support for /etc/ppp/ip-{up,down}.local. (Closes: #85173, #119878)
+  * Create a new ppp-dev package for headers. (Closes: #101618)
+  * Add an example script from Brian May which implements exponential
+    redialing retries. (Closes: #56963, #140587, #205046)
+  * Add example scripts to support per-user ip-{up,down}.d directories.
+    (Closes: #46896, #60250)
+  * Export the call options as an environment variable. (Closes: #51880)
+  * Restore support for the 'quick' argument to pon.
+  * Add the cifdefroute.dif patch (from the SuSE ppp package).
+    (Closes: #93936)
+
+ -- Marco d'Itri <md@linux.it>  Thu, 21 Aug 2003 17:33:21 +0200
+
+ppp (2.4.1.uus-5) unstable; urgency=low
+
+  * Officially taking over the package.
+
+  * Applied patch to stop pppd hanging on exit.
+    Closes: #33997
+
+  * Made the appropriate copyright notice change regarding the new BSD license.
+    Closes: #123831
+
+  * Fixed the download location in the copyright file.
+    Closes: #144348, #160116
+
+  * Added documentation for unit parameter for pppd.8.
+    Closes: #169385
+
+  * Change permissions on /etc/ppp to 0755.
+    Closes: #169258, #169259
+
+  * Check for /dev/.devfsd before checking for /dev/ppp
+
+ -- Russell Coker <russell@coker.com.au>  Sun, 24 Nov 2002 12:58:00 +0100
+
+ppp (2.4.1.uus-4.3) unstable; urgency=low
+
+  * NMU with permission.
+  * Fix for numeric out of bounds giving a SEGV.
+    Closes: #34180
+  * Back-port some plugin interfaces from ppp 2.4.2 for Portslave.
+
+ -- Russell Coker <russell@coker.com.au>  Sat, 14 Sep 2002 08:46:00 +0200
+
+ppp (2.4.1.uus-4.2) unstable; urgency=low
+
+  * NMU
+  * Simple rebuild to deal with libpcap0->libpcap0.7 transition.
+    Closes: #156183
+
+ -- LaMont Jones <lamont@debian.org>  Wed, 14 Aug 2002 21:45:43 -0600
+
+ppp (2.4.1.uus-4.1) unstable; urgency=low
+
+  * Non maintainer upload
+  * Rebuilt with new libpcap to remove dependency on libpcap0, which I
+    got removed from unstable by accident. Sorry about this...
+
+ -- Torsten Landschoff <torsten@debian.org>  Sat, 10 Aug 2002 11:37:27 +0200
+
+ppp (2.4.1.uus-4) unstable; urgency=low
+
+  * Use MAKEDEV in postinst, not mknod. (Closes: #122574)
+
+ -- Michael Beattie <mjb@debian.org>  Tue, 11 Dec 2001 00:24:05 +1300
+
+ppp (2.4.1.uus-3) unstable; urgency=low
+
+  * Enhanced init script for restarting connection.
+  * removed debconf note, the specifics are in README.Debian,
+    which should be read by users anyway. (Closes: #118871)
+  * Removed postinst question about very very old and obsolete
+    /etc/ppp/ppp-connect
+  * Removed debian/suid
+  * Updated README.Debian with info about ppp packet filtering,
+    and ipv6 support
+  * Added "active-filter" with a description to /etc/ppp/options
+
+ -- Michael Beattie <mjb@debian.org>  Mon, 12 Nov 2001 19:15:08 +1300
+
+ppp (2.4.1.uus-2) unstable; urgency=low
+
+  * Added versioned build dependency on debhelper (Closes: #117497)
+  * Enabled IPV6 support (Closes: #117727)
+  * Changed /etc/init.d/ppp to fully stop and restart pppd.
+    Not just signal a redial. (Closes: #117220)
+  * Corrected pppd(8) with respects to the active-filter option.
+    (Closes: #116809)
+  * Applied patch from Russell Coker to add extra debugging info for
+    child processes
+
+ -- Michael Beattie <mjb@debian.org>  Wed,  7 Nov 2001 20:53:26 +1300
+
+ppp (2.4.1.uus-1) unstable; urgency=low
+
+  * The Lets-get-rid-of-dbs release. Now using perl's patching method.
+    "uus" in upstream version to allow replacement of current 2.4.1 source
+    package. (unadulterated upstream source)
+  * Fixes to memory management patch (Closes: #113323, #106913, #111052)
+  * Removed kernel mode pppoe patch. Breaks demand dialling. Upstream
+    is planning on native pppoe support for 2.4.2 (Closes: #103843)
+  * Enabled PPP packet filtering. (Closes: #111522)
+  * Added Russian debconf template. (Closes: #112654)
+  * Completely remove /etc/ppp and /etc/chatscripts on purge, instead of
+    just removing selected files within. (Closes: #107910)
+
+ -- Michael Beattie <mjb@debian.org>  Sat, 29 Sep 2001 23:15:44 +1200
+
+
+-------------------------changelog.gz----------------------
+What's new in ppp-2.4.7.
+************************
+
+* Fixed a potential security issue in parsing option files (CVE-2014-3158).
+
+* There is a new "stop-bits" option, which takes an argument of 1 or 2,
+  indicating the number of stop bits to use for async serial ports.
+
+* Various bug fixes.
+
+
+What was new in ppp-2.4.6.
+**************************
+
+* Man page updates.
+
+* Several bug fixes.
+
+* Options files can now set and unset environment variables for
+  scripts.
+
+* The timeout for chat scripts can now be taken from an environment
+  variable.
+
+* There is a new option, master_detach, which allows pppd to detach
+  from the controlling terminal when it is the multilink bundle master
+  but its own link has terminated, even if the nodetach option has
+  been given.
+
+
+What was new in ppp-2.4.5.
+**************************
+
+* Under Linux, pppd can now operate in a mode where it doesn't request
+  the peer's IP address, as some peers refuse to supply an IP address.
+  Since Linux supports device routes as well as gateway routes, it's
+  possible to have no remote IP address assigned to the ppp interface
+  and still route traffic over it.
+
+* Pppd now works better with 3G modems that do strange things such as
+  sending IPCP Configure-Naks with the same values over and over again.
+
+* The PPP over L2TP plugin is included, which works with the pppol2tp
+  PPP channel code in the Linux kernel.  This allows pppd to be used
+  to set up tunnels using the Layer 2 Tunneling Protocol.
+
+* A new 'enable-session' option has been added, which enables session
+  accounting via PAM or wtwp/wtmpx, as appropriate.  See the pppd man
+  page for details.
+
+* Several bugs have been fixed.
+
+
+What was new in ppp-2.4.4.
+**************************
+
+* Pppd will now run /etc/ppp/ip-pre-up, if it exists, after creating
+  the ppp interface and configuring its IP addresses but before
+  bringing it up.  This can be used, for example, for adding firewall
+  rules for the interface.
+
+* Lots of bugs fixed, particularly in the area of demand-dialled and
+  persistent connections.
+
+* The rp-pppoe plugin now accepts any interface name (that isn't an
+  existing pppd option name) without putting "nic-" on the front of
+  it, not just eth*, nas*, tap* and br*.
+
+
+What was new in ppp-2.4.3.
+**************************
+
+* The configure script now accepts --prefix and --sysconfdir options.
+  These default to /usr/local and /etc.  If you want pppd put in
+  /usr/sbin as before, use ./configure --prefix=/usr.
+
+* Doing `make install' no longer puts example configuration files in
+  /etc/ppp.  Use `make install-etcppp' if you want that.
+
+* The code has been updated to work with version 0.8.3 of libpcap.
+  Unfortunately the libpcap maintainers removed support for the
+  "inbound" and "outbound" keywords on PPP links, meaning that if you
+  link pppd with libpcap-0.8.3, you can't use those keywords in the
+  active-filter and pass-filter expressions.  The support has been
+  reinstated in the CVS version and should be in future libpcap
+  releases.  If you need the in/outbound keywords, use a later release
+  than 0.8.3, or get the CVS version from http://www.tcpdump.org.
+
+* There is a new option, child-timeout, which sets the length of time
+  that pppd will wait for child processes (such as the command
+  specified with the pty option) to exit before exiting itself.  It
+  defaults to 5 seconds.  After the timeout, pppd will send a SIGTERM
+  to any remaining child processes and exit.  A value of 0 means no
+  timeout.
+
+* Various bugs have been fixed, including some CBCP packet parsing
+  bugs that could lead to the peer being able to crash pppd if CBCP
+  support is enabled.
+
+* Various fixes and enhancements to the radius and rp-pppoe plugins
+  have been added.
+
+* There is a new winbind plugin, from Andrew Bartlet of the Samba
+  team, which provides the ability to authenticate the peer against an
+  NT domain controller using MS-CHAP or MS-CHAPV2.
+
+* There is a new pppoatm plugin, by various authors, sent in by David
+  Woodhouse.
+
+* The multilink code has been substantially reworked.  The first pppd
+  for a bundle still controls the ppp interface, but it doesn't exit
+  until all the links in the bundle have terminated.  If the first
+  pppd is signalled to exit, it signals all the other pppds
+  controlling links in the bundle.
+
+* The TDB code has been updated to the latest version.  This should
+  eliminate the problem that some people have seen where the database
+  file (/var/run/pppd.tdb) keeps on growing.  Unfortunately, however,
+  the new code uses an incompatible database format.  For this reason,
+  pppd now uses /var/run/pppd2.tdb as the database filename.
+
+
+What was new in ppp-2.4.2.
+**************************
+
+* The CHAP code has been rewritten.  Pppd now has support for MS-CHAP
+  V1 and V2 authentication, both as server and client.  The new CHAP
+  code is cleaner than the old code and avoids some copyright problems
+  that existed in the old code.
+
+* MPPE (Microsoft Point-to-Point Encryption) support has been added,
+  although the current implementation shouldn't be considered
+  completely secure.  (There is no assurance that the current code
+  won't ever transmit an unencrypted packet.)
+
+* James Carlson's implementation of the Extensible Authentication
+  Protocol (EAP) has been added.
+
+* Support for the Encryption Control Protocol (ECP) has been added.
+
+* Some new plug-ins have been included:
+  - A plug-in for kernel-mode PPPoE (PPP over Ethernet)
+  - A plug-in for supplying the PAP password over a pipe from another
+    process
+  - A plug-in for authenticating using a Radius server.
+
+* Updates and bug-fixes for the Solaris port.
+
+* The CBCP (Call Back Control Protocol) code has been updated.  There
+  are new options `remotenumber' and `allow-number'.
+
+* Extra hooks for plugins to use have been added.
+
+* There is now a `maxoctets' option, which causes pppd to terminate
+  the link once the number of bytes passed on the link exceeds a given
+  value.
+
+* There are now options to control whether pppd can use the IPCP
+  IP-Address and IP-Addresses options: `ipcp-no-address' and
+  `ipcp-no-addresses'.
+
+* Fixed several bugs, including potential buffer overflows in chat.
+
+
+What was new in ppp-2.4.1.
+**************************
+
+* Pppd can now print out the set of options that are in effect.  The
+  new `dump' option causes pppd to print out the option values after
+  option parsing is complete.  The `dryrun' option causes pppd to
+  print the options and then exit.
+
+* The option parsing code has been fixed so that options in the
+  per-tty options file are parsed correctly, and don't override values
+  from the command line in most cases.
+
+* The plugin option now looks in /usr/lib/pppd/<pppd-version> (for
+  example, /usr/lib/pppd/2.4.1b1) for shared objects for plugins if
+  there is no slash in the plugin name.
+
+* When loading a plugin, pppd will now check the version of pppd for
+  which the plugin was compiled, and refuse to load it if it is
+  different to pppd's version string.  To enable this, the plugin
+  source needs to #include "pppd.h" and have a line saying:
+	char pppd_version[] = VERSION;
+
+* There is a bug in zlib, discovered by James Carlson, which can cause
+  kernel memory corruption if Deflate is used with the lowest setting,
+  8.  As a workaround pppd will now insist on using at least 9.
+
+* Pppd should compile on Solaris and SunOS again.
+
+* Pppd should now set the MTU correctly on demand-dialled interfaces.
+
+
+What was new in ppp-2.4.0.
+**************************
+
+* Multilink: this package now allows you to combine multiple serial
+  links into one logical link or `bundle', for increased bandwidth and
+  reduced latency.  This is currently only supported under the
+  2.4.x and later Linux kernels.
+
+* All the pppd processes running on a system now write information
+  into a common database.  I used the `tdb' code from samba for this.
+
+* New hooks have been added.
+
+
+What was new in ppp-2.3.11.
+***************************
+
+* Support for Solaris 8 has been added, including support for
+  replumbing and IPV6.
+
+* The Solaris `snoop' utility should now work on ppp interfaces.
+
+* New hooks have been added - pap_logout_hook, ip_up_hook, and
+  ip_down_hook.
+
+* A new `passprompt' plugin is included, thanks to Alan Curry, which
+  makes it possible for pppd to call an external program to get the
+  PAP password to send to the peer.
+
+* The error messages for the situation where authentication is
+  required because the system has a default route have been improved.
+
+* There is a new connect_delay option which specifies how long pppd
+  should pause after the connect script finishes.  Previously this
+  delay was fixed at 1 second.  (This delay terminates as soon as pppd
+  sees a valid PPP frame from the peer.)
+
+* The `hide-password' option is now the default, and there is a new
+  `show-password' option to enable the printing of password strings in
+  the debug output.
+
+* A fairly complete list of the names of PPP protocols has been added
+  so that when pppd rejects a frame because its protocol is not
+  supported, it can print the name of the unsupported protocol.
+
+* Synchronous serial lines are supported under Linux 2.3.x.
+
+* The bug where pppd would not recognize a modem hangup under Linux
+  2.3.x kernels has been fixed.
+
+
+What was new in ppp-2.3.10.
+***************************
+
+* Pppd now supports `plugins', which are pieces of code (packaged as
+  shared libraries) which can be loaded into pppd at runtime and which
+  can affect its behaviour.  The intention is that plugins provide a
+  way for people to customize the behaviour of pppd for their own
+  needs without needing to change the base pppd source.  I have added
+  some hooks into pppd (places where pppd will call a function
+  pointer, if non-zero, to replace some of pppd's code) and I will be
+  receptive to suggestions about places to add more hooks.  Plugins
+  are supported under Linux and Solaris at present.
+
+* We have a new maintainer for the Solaris port, Adi Masputra of Sun
+  Microsystems, and he has updated the Solaris port so that it should
+  work on 64-bit machines under Solaris 7 and later.
+
+* Pppd now has an `allow-ip' option, which takes an argument which is
+  an IP address (or subnet) which peers are permitted to use without
+  authenticating themselves.  The argument takes the same form as each
+  element of the allowed IP address list in the secrets files.  The
+  allow-ip option is privileged and may be specified multiple times.
+  Using the allow-ip option should be cleaner than putting a line like
+  `"" * "" address' in /etc/ppp/pap-secrets.
+
+* Chat can now substitute environment variables into the script.  This
+  is enabled by the -E flag.  (Thanks to Andreas Arens for the patch.)
+
+* If the PAP username and password from the peer contains unprintable
+  characters, they will be translated to a printable form before
+  looking in the pap-secrets file.  Characters >= 0x80 are translated
+  to a M- form, and characters from 0 to 0x1f (and 0x7f as well) are
+  translated to a ^X form.  If this change causes you grief, let me
+  know what would be a better translation.  It appears that some peers
+  send nulls or other control characters in their usernames and
+  passwords.
+
+* Pppd has new `ktune' and `noktune' options, which enable/disable
+  it to change kernel settings as appropriate.  This is only
+  implemented under Linux, and requires the /proc filesystem to be
+  mounted.  Under Linux, with the ktune option, pppd will enable IP
+  forwarding in the kernel if the proxyarp option is used, and will
+  enable the dynamic IP address kernel option in demand mode if the
+  local IP address changes.
+
+* Pppd no longer requires a remote address to be specified for demand
+  dialling.  If none is specified, it will use a default value of
+  10.112.112.112+unit_number.  (It will not propose this default to
+  the peer.)
+
+* The default holdoff is now 0 if no connect script is given.
+
+* The IPV6 code from Tommi Komulainen, which I unfortunately only
+  partially merged in to ppp-2.3.9, has been fixed and updated.
+
+* The linux compilation glitches should be fixed now.
+
+
+What was new in ppp-2.3.9.
+**************************
+
+* Support for the new generic PPP layer under development for the
+  Linux kernel.
+
+* You can now place extra options to apply to specific users at the
+  end of the line with their password in the pap-secrets or
+  chap-secrets file, separated from the IP address(es) with a "--"
+  separator.  These options are parsed after the peer is authenticated
+  but before network protocol (IPCP, IPXCP) or CCP negotiation
+  commences.
+
+* Pppd will apply the holdoff period if the link was terminated by the
+  peer.  It doesn't apply it if the link was terminated because the
+  local pppd thought it was idle.
+
+* Synchronous support for Solaris has been added, thanks to John
+  Morrison, and for FreeBSD, thanks to Paul Fulghum.
+
+* IPV6 support has been merged in, from Tommi Komulainen.  At the
+  moment it only supports Linux and it is not tested by me.
+
+* The `nodefaultip' option can be used in demand mode to say that pppd
+  should not suggest its local IP address to the peer.
+
+* The `init' option has been added; this causes pppd to run a script
+  to initialize the serial device (e.g. by sending an init string to
+  the modem).  Unlike the connect option, this can be used in a
+  dial-in situation.  (Thanks to Tobias Ringstrom.)
+
+* There is a new `logfile' option to send log messages to a file as
+  well as syslog.
+
+* There is a new, privileged `linkname' option which sets a logical
+  name for the link.  Pppd will create a /var/run/ppp-<linkname>.pid
+  file containing its process ID.
+
+* There is a new `maxfail' option which specifies how many consecutive
+  failed connection attempts are permitted before pppd will exit.  The
+  default value is 10, and 0 means infinity. :-)
+
+* Sundry bugs fixed.
+
+
+What was new in ppp-2.3.8.
+**************************
+
+* The exit status of pppd will now indicate whether the link was
+  successfully established, or if not, what error was encountered.
+
+* Pppd has two new options: fdlog <n> will send log messages to file
+  descriptor <n> instead of standard output, and nofdlog will stop log
+  messages from being sent to any file descriptor (they will still be
+  sent to syslog).  Pppd now will not send log messages to a file
+  descriptor if the serial port is open on that file descriptor.
+
+* Pppd sets an environment variable called PPPLOGNAME for scripts that
+  it runs, indicating the login name of the user who invoked pppd.
+
+* Pppd sets environment variables CONNECT_TIME, BYTES_SENT and
+  BYTES_RCVD for the ip-down and auth-down scripts indicating the
+  statistics for the connection just terminated.  (CONNECT_TIME is in
+  seconds.)
+
+* If the user has the serial device open on standard input and
+  specifies a symbolic link to the serial device on the command line,
+  pppd will detect this and behave correctly (i.e. not detach from its
+  controlling terminal).  Furthermore, if the serial port is open for
+  reading and writing on standard input, pppd will assume that it is
+  locked by its invoker and not lock it itself.
+
+* Chat now has a feature where if a string to be sent begins with an
+  at sign (@), the rest of the string is taken as the name of a file
+  (regular file or named pipe), and the actual string to send is taken
+  from that file.
+
+* Support for FreeBSD-2.2.8 and 3.0 has been added, thanks to Paul
+  Fulghum.
+
+* The Tru64 (aka Digital Unix aka OSF/1) port has been updated.
+
+* The system panics on Solaris SMP systems related to PPP connections
+  being established and terminated should no longer occur.
+
+* Fixed quite a few bugs.
+
+
+What was new in ppp-2.3.7.
+**************************
+
+* Pppd can now automatically allocate itself a pseudo-tty to use as
+  the serial device.  This has made three new options possible:
+
+  - `pty script' will run `script' with its standard input and output
+    connected to the master side of the pty.  For example:
+	pppd pty 'ssh -t server.my.net pppd'
+    is a basic command for setting up a PPP link (tunnel) over ssh.
+    (In practice you may need to specify other options such as IP
+    addresses, etc.)
+
+  - `notty' tells pppd to communicate over its standard input and
+    output, which do not have to be a terminal device.
+
+  - `record filename' tells pppd to record all of the characters sent
+    and received over the serial device to a file called `filename'.
+    The data is recorded in a tagged format with timestamps, which can
+    be printed in a readable form with the pppdump program, which is
+    included in this distribution.
+
+* Pppd now logs the connect time and number of bytes sent and received
+  (at the level of the serial device) when the connection is
+  terminated.
+
+* If you use the updetach or nodetach option, pppd will print its
+  messages to standard output as well as logging them with syslog
+  (provided of course pppd isn't using its standard input or output as
+  its serial device).
+
+* There is a new `privgroup groupname' option (a privileged option).
+  If the user running pppd is in group `groupname', s/he can use
+  privileged options without restriction.
+
+* There is a new `receive-all' option, which causes pppd to accept all
+  control characters, even the ones that the peer should be escaping
+  (i.e. the receive asyncmap is 0).  This is useful with some buggy
+  peers.
+
+* The default asyncmap is now 0.
+
+* There is a new `sync' option, currently only implemented under
+  Linux, which allows pppd to run on synchronous HDLC devices.
+
+* If a value for the device name or for the connect, disconnect,
+  welcome or pty option is given in a privileged option file
+  (i.e. /etc/ppp/options or a file loaded with the `call' option), it
+  cannot be overridden by a non-privileged user.
+
+* Many bugs have been fixed, notably:
+  - signals are not blocked unnecessarily, as they were in 2.3.6.
+  - the usepeerdns option should work now.
+  - the SPEED environment variable for scripts is set correctly.
+  - the /etc/ppp/auth-down script is not run until auth-up completes.
+  - the device is opened as root if it is the device on standard
+    input.
+  - pppd doesn't die with the ioctl(PPPIOCSASYNCMAP) error under linux
+    if a hangup occurs at the wrong time.
+
+* Some error messages have been changed to be clearer (I hope :-)
+
+
+What was new in ppp-2.3.6.
+**************************
+
+* Pppd now opens the tty device as the user (rather than as root) if
+  the device name was given by the user, i.e. on the command line or
+  in the ~/.ppprc file.  If the device name was given in
+  /etc/ppp/options or in a file loaded with the `call' option, the
+  device is opened as root.
+
+* The default behaviour of pppd is now to let a peer which has not
+  authenticated itself (e.g. your ISP) use any IP address to which the
+  system does not already have a route.  (This is currently only
+  supported under Linux, Solaris and Digital Unix; on the other
+  systems, the peer must now authenticate itself unless the noauth
+  option is used.)
+
+* Added new option `usepeerdns', thanks to Nick Walker
+  <nickwalker@email.com>.  If the peer supplies DNS addresses, these
+  will be written to /etc/ppp/resolv.conf.  The ip-up script can then
+  be used to add these addresses to /etc/resolv.conf if desired (see
+  the ip-up.local.add and ip-down.local.add files in the scripts
+  directory).
+
+* The Solaris ppp driver should now work correctly on SMP systems.
+
+* Minor corrections so that the code can compile under Solaris 7,
+  and under Linux with glibc-2.1.
+
+* The Linux kernel driver has been restructured for improved
+  performance.
+
+* Pppd now won't start the ip-down script until the ip-up script has
+  finished.
+
+
+What was new in ppp-2.3.5.
+**************************
+
+* Minor corrections to the Digital UNIX and NetBSD ports.
+
+* A workaround to avoid tickling a bug in the `se' serial port driver
+on Sun PCI Ultra machines running Solaris.
+
+* Fixed a bug in the negotiation of the Microsoft WINS server address
+option.
+
+* Fixed a bug in the Linux port where it would fail for kernel
+versions above 2.1.99.
+
+
+What was new in ppp-2.3.4.
+**************************
+
+* The NeXT port has been updated, thanks to Steve Perkins.
+
+* ppp-2.3.4 compiles and works under Solaris 2.6, using either gcc or
+cc.
+
+* With the Solaris, SVR4 and SunOS ports, you can control the choice
+of C compiler, C compiler options, and installation directories by
+editing the svr4/Makedefs or sunos4/Makedefs file.
+
+* Until now, we have been using the number 24 to identify Deflate
+compression in the CCP negotiations, which was the number in the draft
+RFC describing Deflate.  The number actually assigned to Deflate is
+26.  The code has been changed to use 26, but to allow the use of 24
+for now for backwards compatibility.  (This can be disabled with the
+`nodeflatedraft' option to pppd.)
+
+* Fixed some bugs in the linux driver and deflate compressor which
+were causing compression problems, including corrupting long
+incompressible packets sometimes.
+
+* Fixes to the PAM and shadow password support in pppd, from Al
+Longyear and others.
+
+* Pppd now sets some environment variables for scripts it invokes
+(ip-up/down, auth-ip/down), giving information about the connection.
+The variables it sets are PEERNAME, IPLOCAL, IPREMOTE, UID, DEVICE,
+SPEED, and IFNAME.
+
+* Pppd now has an `updetach' option, which will cause it to detach
+from its controlling terminal once the link has come up (i.e. once it
+is available for IP traffic).
+
+
+What was new in ppp-2.3.3.
+**************************
+
+* Fixed compilation problems under SunOS.
+
+* Fixed a bug introduced into chat in 2.3.2, and compilation problems
+introduced into the MS-CHAP implementation in 2.3.2.
+
+* The linux kernel driver has been updated for recent 2.1-series
+kernel changes, and it now will ask kerneld to load compression
+modules when required, if the kernel is configured to support kerneld.
+
+* Pppd should now compile correctly under linux on systems with glibc.
+
+
+What was new in ppp-2.3.2.
+**************************
+
+* In 2.3.1, I made a change which was intended to make pppd able to
+detect loss of CD during or immediately after the connection script
+runs.  Unfortunately, this had the side-effect that the connection
+script wouldn't work at all on some systems.  This change has been
+reversed.
+
+* Fix compilation problems in the Linux kernel driver.
+
+
+What was new in ppp-2.3.1.
+**************************
+
+* Enhancements to chat, thanks to Francis Demierre.  Chat can now
+accept comments in the chat script file, and has new SAY, HANGUP,
+CLR_ABORT and CLR_REPORT keywords.
+
+* Fixed a bug which causes 2.3.0 to crash Solaris systems.
+
+* Bug-fixes and restructuring of the Linux kernel driver.
+
+* The holdoff behaviour of pppd has been changed slightly: now, if
+the link comes up for IP (or other network protocol) traffic, we
+consider that the link has been successfully established, and don't
+enforce the holdoff period after the link goes down.
+
+* Pppd should now correctly wait for CD (carrier detect) from the
+modem, even when the serial port initially had CLOCAL set, and it
+should also detect loss of CD during or immediately after the
+connection script runs.
+
+* Under linux, pppd will work with older 2.2.0* version kernel
+drivers, although demand-dialling is not supported with them.
+
+* Minor bugfixes for pppd.
+
+
+What was new in ppp-2.3.
+************************
+
+* Demand-dialling.  Pppd now has a mode where it will establish the
+network interface immediately when it starts, but not actually bring
+the link up until it sees some data to be sent.  Look for the demand
+option description in the pppd man page.  Demand-dialling is not
+supported under Ultrix or NeXTStep.
+
+* Idle timeout.  Pppd will optionally terminate the link if no data
+packets are sent or received within a certain time interval.
+
+* Pppd now runs the /etc/ppp/auth-up script, if it exists, when the
+peer successfully authenticates itself, and /etc/ppp/auth-down when
+the connection is subsequently terminated.  This can be useful for
+accounting purposes.
+
+* A new packet compression scheme, Deflate, has been implemented.
+This uses the same compression method as `gzip'.  This method is free
+of patent or copyright restrictions, and it achieves better
+compression than BSD-Compress.  It does consume more CPU cycles for
+compression than BSD-Compress, but this shouldn't be a problem for
+links running at 100kbit/s or less.
+
+* There is no code in this distribution which is covered by Brad
+Clements' restrictive copyright notice.  The STREAMS modules for SunOS
+and OSF/1 have been rewritten, based on the Solaris 2 modules, which
+were written from scratch without any Clements code.
+
+* Pppstats has been reworked to clean up the output format somewhat.
+It also has a new -d option which displays data rate in kbyte/s for
+those columns which would normally display bytes.
+
+* Pppd options beginning with - or + have been renamed, e.g. -ip
+became noip, +chap became require-chap, etc.  The old options are
+still accepted for compatibility but may be removed in future.
+
+* Pppd now has some options (such as the new `noauth' option) which
+can only be specified if it is being run by root, or in an
+"privileged" options file: /etc/ppp/options or an options file in the
+/etc/ppp/peers directory.  There is a new "call" option to read
+options from a file in /etc/ppp/peers, making it possible for non-root
+users to make unauthenticated connections, but only to certain trusted
+peers.  My intention is to make the `auth' option the default in a
+future release.
+
+* Several minor new features have been added to pppd, including the
+maxconnect and welcome options.  Pppd will now terminate the
+connection when there are no network control protocols running.  The
+allowed IP address(es) field in the secrets files can now specify
+subnets (with a notation like 123.45.67.89/24) and addresses which are
+not acceptable (put a ! on the front).
+
+* Numerous bugs have been fixed (no doubt some have been introduced :-)
+Thanks to those who reported bugs in ppp-2.2.
+
+
+-------------------------FAQ.gz----------------------
+This is a list of Frequently Asked Questions about using ppp-2.x and
+their answers.
+
+
+------------------------------------------------------------------------
+
+Q: Can you give me an example of how I might set up my machine to dial
+out to an ISP?
+
+A: Here's an example for dialling out to an ISP via a modem on
+/dev/tty02.  The modem uses hardware (CTS/RTS) flow control, and the
+serial port is run at 38400 baud.  The ISP assigns our IP address.
+
+To configure pppd for this connection, create a file under
+/etc/ppp/peers called (say) my-isp containing the following:
+
+tty02 crtscts 38400
+connect 'chat -v -f /etc/ppp/chat/my-isp'
+defaultroute
+
+The ppp connection is then initiated using the following command:
+
+pppd call my-isp
+
+Of course, if the directory containing pppd is not in your path, you
+will need to give the full pathname for pppd, for example,
+/usr/sbin/pppd.
+
+When you run this, pppd will use the chat program to dial the ISP and
+invoke its ppp service.  Chat will read the file specified with -f,
+namely /etc/ppp/chat/my-isp, to find a list of strings to expect to
+receive, and strings to send.  This file would contain something like
+this:
+
+ABORT "NO CARRIER"
+ABORT "NO DIALTONE"
+ABORT "ERROR"
+ABORT "NO ANSWER"
+ABORT "BUSY"
+ABORT "Username/Password Incorrect"
+"" "at"
+OK "at&d2&c1"
+OK "atdt2479381"
+"name:" "^Uusername"
+"word:" "\qpassword"
+"annex" "\q^Uppp"
+"Switching to PPP-ppp-Switching to PPP"
+
+You will need to change the details here.  The first string on each
+line is a string to expect to receive; the second is the string to
+send.  You can add or delete lines according to the dialog required to
+access your ISP's system.  This example is for a modem with a standard
+AT command set, dialling out to an Annex terminal server.  The \q
+toggles "quiet" mode; when quiet mode is on, the strings to be sent
+are replaced by ?????? in the log.  You may need to go through the
+dialog manually using kermit or tip first to determine what should go
+in the script.
+
+To terminate the link, run the following script, called (say)
+kill-ppp:
+
+#!/bin/sh
+unit=ppp${1-0}
+piddir=/var/run
+if [ -f $piddir/$unit.pid ]; then
+  kill -1 `cat $piddir/$unit.pid`
+fi
+
+On some systems (SunOS, Solaris, Ultrix), you will need to change
+/var/run to /etc/ppp.
+
+
+------------------------------------------------------------------------
+
+Q: Can you give me an example of how I could set up my office machine
+so I can dial in to it from home?
+
+A: Let's assume that the office machine is called "office" and is on a
+local ethernet subnet.  Call the home machine "home" and give it an IP
+address on the same subnet as "office".  We'll require both machines
+to authenticate themselves to each other.
+
+Set up the files on "office" as follows:
+
+/etc/ppp/options contains:
+
+auth		# require the peer to authenticate itself
+lock
+# other options can go here if desired
+
+/etc/ppp/chap-secrets contains:
+
+home	office	"beware the frub-jub"	home
+office	home	"bird, my son!%&*"	-
+
+Set up a modem on a serial port so that users can dial in to the
+modem and get a login prompt.
+
+On "home", set up the files as follows:
+
+/etc/ppp/options contains the same as on "office".
+
+/etc/ppp/chap-secrets contains:
+
+home	office	"beware the frub-jub"	-
+office	home	"bird, my son!%&*"	office
+
+Create a file called /etc/ppp/peers/office containing the following:
+
+tty02 crtscts 38400
+connect 'chat -v -f /etc/ppp/chat/office'
+defaultroute
+
+(You may need to change some of the details here.)
+
+Create the /etc/ppp/chat/office file containing the following:
+
+ABORT "NO CARRIER"
+ABORT "NO DIALTONE"
+ABORT "ERROR"
+ABORT "NO ANSWER"
+ABORT "BUSY"
+ABORT "ogin incorrect"
+"" "at"
+OK "at&d2&c1"
+OK "atdt2479381"
+"name:" "^Uusername"
+"word:" "\qpassword"
+"$" "\q^U/usr/sbin/pppd proxyarp"
+"~"
+
+You will need to change the details.  Note that the "$" in the
+second-last line is expecting the shell prompt after a successful
+login - you may need to change it to "%" or something else.
+
+You then initiate the connection (from home) with the command:
+
+pppd call office
+
+------------------------------------------------------------------------
+
+Q: When I try to establish a connection, the modem successfully dials
+the remote system, but then hangs up a few seconds later.  How do I
+find out what's going wrong?
+
+A: There are a number of possible problems here.  The first thing to
+do is to ensure that pppd's messages are visible.  Pppd uses the
+syslog facility to log messages which help to identify specific
+problems.  Messages from pppd have facility "daemon" and levels
+ranging from "debug" to "error".
+
+Usually it is useful to see messages of level "notice" or higher on
+the console.  To see these, find the line in /etc/syslog.conf which
+has /dev/console on the right-hand side, and add "daemon.notice" in
+the list on the left.  The line will end up looking something like
+this:
+
+*.err;kern.debug;auth.notice;mail.crit;daemon.notice	/dev/console
+
+Note that the whitespace is tabs, *not* spaces.
+
+If you are having problems, it may be useful to see messages of level
+"info" as well, in which case you would change "daemon.notice" to
+"daemon.info".
+
+In addition, it is useful to collect pppd's debugging output in a
+file - the debug option to pppd causes it to log the contents of all
+control packets sent and received in human-readable form.  To do this,
+add a line like this to /etc/syslog.conf:
+
+daemon,local2.debug		/etc/ppp/log
+
+and create an empty /etc/ppp/log file.
+
+When you change syslog.conf, you will need to send a HUP signal to
+syslogd to causes it to re-read syslog.conf.  You can do this with a
+command like this (as root):
+
+	kill -HUP `cat /etc/syslogd.pid`
+
+(On some systems, you need to use /var/run/syslog.pid instead of
+/etc/syslogd.pid.)
+
+After setting up syslog like this, you can use the -v flag to chat and
+the `debug' option to pppd to get more information.  Try initiating
+the connection again; when it fails, inspect /etc/ppp/log to see what
+happened and where the connection failed.
+
+
+------------------------------------------------------------------------
+
+Q: When I try to establish a connection, I get an error message saying
+"Serial link is not 8-bit clean".  Why?
+
+A: The most common cause is that your connection script hasn't
+successfully dialled out to the remote system and invoked ppp service
+there.  Instead, pppd is talking to something (a shell or login
+process on the remote machine, or maybe just the modem) which is only
+outputting 7-bit characters.
+
+This can also arise with a modem which uses an AT command set if the
+dial command is issued before pppd is invoked, rather than within a
+connect script started by pppd.  If the serial port is set to 7
+bits/character plus parity when the last AT command is issued, the
+modem serial port will be set to the same setting.
+
+Note that pppd *always* sets the local serial port to 8 bits per
+character, with no parity and 1 stop bit.  So you shouldn't need to
+issue an stty command before invoking pppd.
+
+
+------------------------------------------------------------------------
+
+Q: When I try to establish a connection, I get an error message saying
+"Serial line is looped back".  Why?
+
+A: Probably your connection script hasn't successfully dialled out to
+the remote system and invoked ppp service there.  Instead, pppd is
+talking to something which is just echoing back the characters it
+receives.  The -v option to chat can help you find out what's going
+on.  It can be useful to include "~" as the last expect string to
+chat, so chat won't return until it's seen the start of the first PPP
+frame from the remote system.
+
+Another possibility is that your phone connection has dropped for some
+obscure reason and the modem is echoing the characters it receives
+from your system.
+
+
+------------------------------------------------------------------------
+
+Q: I installed pppd successfully, but when I try to run it, I get a
+message saying something like "peer authentication required but no
+authentication files accessible".
+
+A: When pppd is used on a machine which already has a connection to
+the Internet (or to be more precise, one which has a default route in
+its routing table), it will require all peers to authenticate
+themselves.  The reason for this is that if you don't require
+authentication, you have a security hole, because the peer can
+basically choose any IP address it wants, even the IP address of some
+trusted host (for example, a host mentioned in some .rhosts file).
+
+On machines which don't have a default route, pppd does not require
+the peer to authenticate itself.  The reason is that such machines
+would mostly be using pppd to dial out to an ISP which will refuse to
+authenticate itself.  In that case the peer can use any IP address as
+long as the system does not already have a route to that address.
+For example, if you have a local ethernet network, the peer can't use
+an address on that network.  (In fact it could if it authenticated
+itself and it was permitted to use that address by the pap-secrets or
+chap-secrets file.)
+
+There are 3 ways around the problem:
+
+1. If possible, arrange for the peer to authenticate itself, and
+create the necessary secrets files (/etc/ppp/pap-secrets and/or
+/etc/ppp/chap-secrets).
+
+2. If the peer refuses to authenticate itself, and will always be
+using the same IP address, or one of a small set of IP addresses, you
+can create an entry in the /etc/ppp/pap-secrets file like this:
+
+  ""	  *	  ""	  his-ip.his-domain his-other-ip.other-domain
+
+(that is, using the empty string for the client name and password
+fields).  Of couse, you replace the 4th and following fields in the
+example above with the IP address(es) that the peer may use.  You can
+use either hostnames or numeric IP addresses.
+
+3. You can add the `noauth' option to the /etc/ppp/options file.
+Pppd will then not ask the peer to authenticate itself.  If you do
+this, I *strongly* recommend that you remove the set-uid bit from the
+permissions on the pppd executable, with a command like this:
+
+	chmod u-s /usr/sbin/pppd
+
+Then, an intruder could only use pppd maliciously if they had already
+become root, in which case they couldn't do any more damage using pppd
+than they could anyway.
+
+
+------------------------------------------------------------------------
+
+Q: What do I need to put in the secrets files?
+
+A: Three things:
+   - secrets (i.e. passwords) to use for authenticating this host to
+     other hosts (i.e., for proving our identity to others);
+   - secrets which other hosts can use for authenticating themselves
+     to us (i.e., so that they can prove their identity to us); and
+   - information about which IP addresses other hosts may use, once
+     they have authenticated themselves.
+
+There are two authentication files: /etc/ppp/pap-secrets, which
+contains secrets for use with PAP (the Password Authentication
+Protocol), and /etc/ppp/chap-secrets, which contains secrets for use
+with CHAP (the Challenge Handshake Authentication Protocol).  Both
+files have the same simple format, which is as follows:
+
+- The file contains a series of entries, each of which contains a
+secret for authenticating one machine to another.
+
+- Each entry is contained on a single logical line.  A logical line
+may be continued across several lines by placing a backslash (\) at
+the end of each line except the last.
+
+- Each entry has 3 or more fields, separated by whitespace (spaces
+and/or tabs).  These fields are, in order:
+	* The name of the machine that is authenticating itself
+	  (the "client").
+	* The name of the machine that is authenticating the client
+	  (the "server").
+	* The secret to be used for authenticating that client to that
+	  server.  If this field begins with the at-sign `@', the rest
+	  of the field is taken as the name of a file containing the
+	  actual secret.
+	* The 4th and any following fields list the IP address(es)
+	  that the client may use.
+
+- The file may contain comments, which begin with a `#' and continue
+to the end of the line.
+
+- Double quotes `"' should be used around a field if it contains
+characters with special significance, such as space, tab, `#', etc.
+
+- The backslash `\' may be used before characters with special
+significance (space, tab, `#', `\', etc.) to remove that significance.
+
+Some important points to note:
+
+* A machine can be *both* a "client" and a "server" for the purposes
+of authentication - this happens when both peers require the other to
+authenticate itself.  So A would authenticate itself to B, and B would
+also authenticate itself to A (possibly using a different
+authentication protocol).
+
+* If both the "client" and the "server" are running ppp-2.x, they need
+to have a similar entry in the appropriate secrets file; the first two
+fields are *not* swapped on the client, compared to the server.  So
+the client might have an entry like this:
+
+	ay	bee	"our little secret"	-
+
+and the corresponding entry on the server could look like this:
+
+	ay	bee	"our little secret"	123.45.67.89
+
+
+------------------------------------------------------------------------
+
+Q: Explain about PAP and CHAP?
+
+PAP stands for the Password Authentication Protocol.  With this
+protocol, the "client" (the machine that needs to authenticate itself)
+sends its name and a password, in clear text, to the "server".  The
+server returns a message indicating whether the name and password are
+valid.
+
+CHAP stands for the Challenge Handshake Authentication Protocol.  It
+is designed to address some of the deficiencies and vulnerabilities of
+PAP.  Like PAP, it is based on the client and server having a shared
+secret, but the secret is never passed in clear text over the link.
+Instead, the server sends a "challenge" - an arbitrary string of
+bytes, and the client must prove it knows the shared secret by
+generating a hash value from the challenge combined with the shared
+secret, and sending the hash value back to the server.  The server
+also generates the hash value and compares it with the value received
+from the client.
+
+At a practical level, CHAP can be slightly easier to configure than
+PAP because the server sends its name with the challenge.  Thus, when
+finding the appropriate secret in the secrets file, the client knows
+the server's name.  In contrast, with PAP, the client has to find its
+password (i.e. the shared secret) before it has received anything from
+the server.  Thus, it may be necessary to use the `remotename' option
+to pppd when using PAP authentication so that it can select the
+appropriate secret from /etc/ppp/pap-secrets.
+
+Microsoft also has a variant of CHAP which uses a different hashing
+arrangement from normal CHAP.  There is a client-side (authenticatee)
+implementation of Microsoft's CHAP in ppp-2.3; see README.MSCHAP80.
+In ppp-2.4.2, server-side (authenticator) support was added as well as
+support for Microsoft CHAP v2; see README.MSCHAP81.
+
+
+------------------------------------------------------------------------
+
+Q: When the modem hangs up, without the remote system having
+terminated the connection properly, pppd does not notice the hangup,
+but just keeps running.  How do I get pppd to notice the hangup and
+exit?
+
+A: Pppd detects modem hangup by looking for an end-of-file indication
+from the serial driver, which should be generated when the CD (carrier
+detect) signal on the serial port is deasserted.  For this to work:
+
+- The modem has to be set to assert CD when the connection is made and
+deassert it when the phone line hangs up.  Usually the AT&C1 modem
+command sets this mode.
+
+- The cable from the modem to the serial port must connect the CD
+signal (on pin 8).
+
+- Some serial drivers have a "software carrier detect" mode, which
+must be *disabled*.  The method of doing this varies between systems.
+Under SunOS, use the ttysoftcar command.  Under NetBSD, edit /etc/ttys
+to remove the "softcar" flag from the line for the serial port, and
+run ttyflags.
+
+
+------------------------------------------------------------------------
+
+Q: Why should I use PPP compression (BSD-Compress or Deflate) when my
+modem already does V.42 compression?  Won't it slow the CPU down a
+lot?
+
+A: Using PPP compression is preferable, especially when using modems
+over phone lines, for the following reasons:
+
+- The V.42 compression in the modem isn't very strong - it's an LZW
+technique (same as BSD-Compress) with a 10, 11 or 12 bit code size.
+With BSD-Compress you can use a code size of up to 15 bits and get
+much better compression, or you can use Deflate and get even better
+compression ratios.
+
+- I have found that enabling V.42 compression in my 14.4k modem
+increases the round-trip time for a character to be sent, echoed and
+returned by around 40ms, from 160ms to 200ms (with error correction
+enabled).  This is enough to make it feel less responsive on rlogin or
+telnet sessions.  Using PPP compression adds less than 5ms (small
+enough that I couldn't measure it reliably).  I admit my modem is a
+cheapie and other modems may well perform better.
+
+- While compression and decompression do require some CPU time, they
+reduce the amount of time spent in the serial driver to transmit a
+given amount of data.  Many machines require an interrupt for each
+character sent or received, and the interrupt handler can take a
+significant amount of CPU time.  So the increase in CPU load isn't as
+great as you might think.  My measurements indicate that a system with
+a 33MHz 486 CPU should be able to do Deflate compression for serial
+link speeds of up to 100kb/s or more.  It depends somewhat on the type
+of data, of course; for example, when compressing a string of nulls
+with Deflate, it's hard to get a high output data rate from the
+compressor, simply because it compresses strings of nulls so well that
+it has to eat a very large amount of input data to get each byte of
+output.
+
+
+------------------------------------------------------------------------
+
+Q: I get messages saying "Unsupported protocol (...) received".  What do
+these mean?
+
+A: If you only get one or two when pppd starts negotiating with the
+peer, they mean that the peer wanted to negotiate some PPP protocol
+that pppd doesn't understand.  This doesn't represent a problem, it
+simply means that there is some functionality that the peer supports
+that pppd doesn't, so that functionality can't be used.
+
+If you get them sporadically while the link is operating, or if the
+protocol numbers (in parentheses) don't correspond to any valid PPP
+protocol that the peer might be using, then the problem is probably
+that characters are getting corrupted on the receive side, or that
+extra characters are being inserted into the receive stream somehow.
+If this is happening, most packets that get corrupted should get
+discarded by the FCS (Frame Check Sequence, a 16-bit CRC) check, but a
+small number may get through.
+
+One possibility may be that you are receiving broadcast messages on
+the remote system which are being sent over your serial link.  Another
+possibility is that your modem is set for XON/XOFF (software) flow
+control and is inserting ^Q and ^S characters into the receive data
+stream.
+
+
+------------------------------------------------------------------------
+
+Q: I get messages saying "Protocol-Reject for unsupported protocol ...".
+What do these mean?
+
+A: This is the other side of the previous question.  If characters are
+getting corrupted on the way to the peer, or if your system is
+inserting extra bogus characters into the transmit data stream, the
+peer may send protocol-reject messages to you, resulting in the above
+message (since your pppd doesn't recognize the protocol number
+either.)
+
+
+------------------------------------------------------------------------
+
+Q: I get a message saying something like "ioctl(TIOCSETD): Operation
+not permitted".  How do I fix this?
+
+A: This is because pppd is not running as root.  If you have not
+installed pppd setuid-root, you will have to be root to run it.  If
+you have installed pppd setuid-root and you still get this message, it
+is probably because your shell is using some other copy of pppd than
+the installed one - for example, if you are in the pppd directory
+where you've just built pppd and your $PATH has . before /usr/sbin (or
+wherever pppd gets installed).
+
+
+------------------------------------------------------------------------
+
+Q: Has your package been ported to HP/UX or IRIX or AIX?
+
+A: No.  I don't have access to systems running HP/UX or AIX.  No-one
+has volunteered to port it to HP/UX.  I had someone who did a port for
+AIX 4.x, but who is no longer able to maintain it.  And apparently AIX
+3.x is quite different, so it would need a separate port.
+
+IRIX includes a good PPP implementation in the standard distribution,
+as far as I know.
+
+
+------------------------------------------------------------------------
+
+Q: Under SunOS 4, when I try to modload the ppp modules, I get the
+message "can't open /dev/vd: No such device".
+
+A: First check in /dev that there is an entry like this:
+
+crw-r--r--  1  root         57,   0 Oct 2  1991 vd
+
+If not, make one (mknod /dev/vd c 57 0).  If the problem still exists,
+probably your kernel has been configured without the vd driver
+included.  The vd driver is needed for loadable module support.
+
+First, identify the config file that was used.  When you boot your
+machine, or if you run /etc/dmesg, you'll see a line that looks
+something like this:
+
+SunOS Release 4.1.3_U1 (CAP_XBOX) #7: Thu Mar 21 15:31:56 EST 1996
+			^^^^^^^^
+			this is the config file name
+
+The config file will be in the /sys/`arch -k`/conf directory (arch -k
+should return sun4m for a SparcStation 10, sun3x for a Sun 3/80,
+etc.).  Look in there for a line saying "options VDDRV".  If that line
+isn't present (or is commented out), add it (or uncomment it).
+
+You then need to rebuild the kernel as described in the SunOS
+manuals.  Basically you need to run config and make like this:
+
+	/usr/etc/config CAP_XBOX
+	cd ../CAP_XBOX
+	make
+
+(replacing the string CAP_XBOX by the name of the config file for your
+kernel, of course).
+
+Then copy the new kernel to /:
+
+	mv /vmunix /vmunix.working
+	cp vmunix /
+
+and reboot.  Modload should then work.
+
+
+------------------------------------------------------------------------
+
+Q: I'm running Linux (or NetBSD or FreeBSD), and my system comes with
+PPP already.  Should I consider installing this package?  Why?
+
+A: The PPP that is already installed in your system is (or is derived
+from) some version of this PPP package.  You can find out what version
+of this package is already installed with the command "pppd --help".
+If this is older than the latest version, you may wish to install the
+latest version so that you can take advantage of the new features or
+bug fixes.
+
+
+------------------------------------------------------------------------
+
+Q: I'm running pppd in demand mode, and I find that pppd often dials
+out unnecessarily when I try to make a connection within my local
+machine or with a machine on my local LAN.  What can I do about this?
+
+A: Very often the cause of this is that a program is trying to contact
+a nameserver to resolve a hostname, and the nameserver (specified in
+/etc/resolv.conf, usually) is on the far side of the ppp link.  You
+can try executing a command such as `ping myhost' (where myhost is the
+name of the local machine, or some other machine on a local LAN), to
+see whether that starts the ppp link.  If it does, check the setup of
+your /etc/hosts file to make sure you have the local machine and any
+hosts on your local LAN listed, and /etc/resolv.conf and/or
+/etc/nsswitch.conf files to make sure you resolve hostnames from
+/etc/hosts if possible before trying to contact a nameserver.
+
+
+------------------------------------------------------------------------
+
+Q: Since I installed ppp-2.3.6, dialin users to my server have been
+getting this message when they run pppd:
+
+peer authentication required but no suitable secret(s) found for 
+authenticating any peer to us (ispserver)
+
+A: In 2.3.6, the default is to let an unauthenticated peer only use IP
+addresses to which the machine doesn't already have a route.  So on a
+machine with a default route, everyone has to authenticate.  If you
+really don't want that, you can put `noauth' in the /etc/ppp/options
+file.  Note that there is then no check on who is using which IP
+address.  IMHO, this is undesirably insecure, but I guess it may be
+tolerable as long as you don't use any .rhosts files or anything like
+that.  I recommend that you require dialin users to authenticate, even
+if just with PAP using their login password (using the `login' option
+to pppd).  If you do use `noauth', you should at least have a pppusers
+group and set the permissions on pppd to allow only user and group to
+execute it.
+
+------------------------------------------------------------------------
+
+Q: When running pppd as a dial-in server, I often get the message
+"LCP: timeout sending Config-Requests" from pppd.  It seems to be
+random, but dial-out always works fine.  What is wrong?
+
+A: Most modern modems auto-detects the speed of the serial line
+between the modem and the computer.  This auto-detection occurs when
+the computer sends characters to the modem, when the modem is in
+command mode.  It does not occur when the modem is in data mode.
+Thus, if you send commands to the modem at 2400 bps, and then change
+the serial port speed to 115200 bps, the modem will not detect this
+change until something is transmitted from the computer to the modem.
+When running pppd in dial-in mode (i.e. without a connect script),
+pppd sets the speed of the serial port, but does not transmit
+anything.  If the modem was already running at the specified speed,
+everything is fine, but if not, you will just receive garbage from the
+modem.  To cure this, use an init script such as the following:
+
+	pppd ttyS0 115200 modem crtscts init "chat '' AT OK"
+
+To reset the modem and enable auto-answer, use:
+
+	pppd ttyS0 115200 modem crtscts init "chat '' ATZ OK ATS0=1 OK"
+
+
+-------------------------PLUGINS.gz----------------------
+Starting with version 2.3.10, pppd includes support for `plugins' -
+pieces of code which can be loaded into pppd at runtime and which can
+affect its behaviour in various ways.  The idea of plugins is to
+provide a way for people to customize the behaviour of pppd without
+having to either apply local patches to each version or get their
+patches accepted into the standard distribution.
+
+A plugin is a standard shared library object, typically with a name
+ending in .so.  They are loaded using the standard dlopen() library
+call, so plugins are only supported on systems which support shared
+libraries and the dlopen call.  At present pppd is compiled with
+plugin support only under Linux and Solaris.
+
+Plugins are loaded into pppd using the `plugin' option, which takes
+one argument, the name of a shared object file.  The plugin option is
+a privileged option.  If the name given does not contain a slash, pppd
+will look in the /usr/lib/pppd/<version> directory for the file, where
+<version> is the version number of pppd, for example, 2.4.2.  I
+suggest that you either give the full path name of the shared object
+file or just the base name; if you don't, it may be possible for
+unscrupulous users to substitute another shared object file for the
+one you mean to load, e.g. by setting the LD_LIBRARY_PATH variable.
+
+Plugins are usually written in C and compiled and linked to a shared
+object file in the appropriate manner for your platform.  Using gcc
+under Linux, a plugin called `xyz' could be compiled and linked with
+the following commands:
+
+	gcc -c -O xyz.c
+	gcc -shared -o xyz.so xyz.o
+
+There are some example plugins in the pppd/plugins directory in the
+ppp distribution.  Currently there is one example, minconn.c, which
+implements a `minconnect' option, which specifies a minimum connect
+time before the idle timeout applies.
+
+Plugins can access global variables within pppd, so it is useful for
+them to #include "pppd.h" from the pppd source directory.
+
+Every plugin must contain a global procedure called `plugin_init'.
+This procedure will get called (with no arguments) immediately after
+the plugin is loaded.  Every plugin should also contain a variable
+called pppd_version declared as follows:
+
+char pppd_version[] = VERSION;
+
+If this declaration is included, pppd will not load the module if its
+version number differs from that compiled into the plugin binary.
+
+Plugins can affect the behaviour of pppd in at least four ways:
+
+1. They can add extra options which pppd will then recognize.  This is
+   done by calling the add_options() procedure with a pointer to an
+   array of option_t structures.  The last entry in the array must
+   have its name field set to NULL.
+
+2. Pppd contains `hook' variables which are procedure pointers.  If a
+   given hook is not NULL, pppd will call the procedure it points to
+   at the appropriate point in its processing.  The plugin can set any
+   of these hooks to point to its own procedures.  See below for a
+   description of the hooks which are currently implemented.
+
+3. Plugin code can call any global procedures and access any global
+   variables in pppd.
+
+4. Plugins can register procedures to be called when particular events
+   occur, using the `notifier' mechanism in pppd.  The differences
+   between hooks and notifiers are that a hook will only call one
+   function, whereas a notifier can call an arbitrary number, and that
+   a hook usually returns some value to pppd, whereas a notifier
+   function returns nothing.
+
+Here is a list of the currently implemented hooks in pppd.
+
+
+int (*idle_time_hook)(struct ppp_idle *idlep);
+
+The idle_time_hook is called when the link first comes up (i.e. when
+the first network protocol comes up) and at intervals thereafter.  On
+the first call, the idlep parameter is NULL, and the return value is
+the number of seconds before pppd should check the link activity, or 0
+if there is to be no idle timeout.
+
+On subsequent calls, idlep points to a structure giving the number of
+seconds since the last packets were sent and received.  If the return
+value is > 0, pppd will wait that many seconds before checking again.
+If it is <= 0, that indicates that the link should be terminated due
+to lack of activity.
+
+
+int (*holdoff_hook)(void);
+
+The holdoff_hook is called when an attempt to bring up the link fails,
+or the link is terminated, and the persist or demand option was used.
+It returns the number of seconds that pppd should wait before trying
+to reestablish the link (0 means immediately).
+
+
+int (*pap_check_hook)(void);
+int (*pap_passwd_hook)(char *user, char *passwd);
+int (*pap_auth_hook)(char *user, char *passwd, char **msgp,
+		     struct wordlist **paddrs,
+		     struct wordlist **popts);
+void (*pap_logout_hook)(void);
+
+These hooks are designed to allow a plugin to replace the normal PAP
+password processing in pppd with something different (e.g. contacting
+an external server).
+
+The pap_check_hook is called to check whether there is any possibility
+that the peer could authenticate itself to us.  If it returns 1, pppd
+will ask the peer to authenticate itself.  If it returns 0, pppd will
+not ask the peer to authenticate itself (but if authentication is
+required, pppd may exit, or terminate the link before network protocol
+negotiation).  If it returns -1, pppd will look in the pap-secrets
+file as it would normally.
+
+The pap_passwd_hook is called to determine what username and password
+pppd should use in authenticating itself to the peer with PAP.  The
+user string will already be initialized, by the `user' option, the
+`name' option, or from the hostname, but can be changed if necessary.
+MAXNAMELEN bytes of space are available at *user, and MAXSECRETLEN
+bytes of space at *passwd.  If this hook returns 0, pppd will use the
+values at *user and *passwd; if it returns -1, pppd will look in the
+pap-secrets file, or use the value from the +ua or password option, as
+it would normally.
+
+The pap_auth_hook is called to determine whether the username and
+password supplied by the peer are valid.  user and passwd point to
+null-terminated strings containing the username and password supplied
+by the peer, with non-printable characters converted to a printable
+form.  The pap_auth_hook function should set msg to a string to be
+returned to the peer and return 1 if the username/password was valid
+and 0 if not.  If the hook returns -1, pppd will look in the
+pap-secrets file as usual.
+
+If the username/password was valid, the hook can set *paddrs to point
+to a wordlist containing the IP address(es) which the peer is
+permitted to use, formatted as in the pap-secrets file.  It can also
+set *popts to a wordlist containing any extra options for this user
+which pppd should apply at this point.
+
+The pap_logout_hook is called when the link is terminated, instead of
+pppd's internal `plogout' function.  It can be used for accounting
+purposes.  This hook is deprecated and will be replaced by a notifier.
+
+
+int (*chap_check_hook)(void);
+int (*chap_passwd_hook)(char *user, char *passwd);
+int (*chap_verify_hook)(char *name, char *ourname, int id,
+			struct chap_digest_type *digest,
+			unsigned char *challenge, unsigned char *response,
+			char *message, int message_space)
+
+These hooks are designed to allow a plugin to replace the normal CHAP
+password processing in pppd with something different (e.g. contacting
+an external server).
+
+The chap_check_hook is called to check whether there is any possibility
+that the peer could authenticate itself to us.  If it returns 1, pppd
+will ask the peer to authenticate itself.  If it returns 0, pppd will
+not ask the peer to authenticate itself (but if authentication is
+required, pppd may exit, or terminate the link before network protocol
+negotiation).  If it returns -1, pppd will look in the chap-secrets
+file as it would normally.
+
+The chap_passwd_hook is called to determine what password
+pppd should use in authenticating itself to the peer with CHAP.  The
+user string will already be initialized, by the `user' option, the
+`name' option, or from the hostname, but can be changed if necessary.
+This hook is called only if pppd is a client, not if it is a server.
+
+MAXSECRETLEN bytes of space are available at *passwd.  If this hook
+returns 0, pppd will use the value *passwd; if it returns -1, pppd
+will fail to authenticate.
+
+The chap_verify_hook is called to determine whether the peer's
+response to our CHAP challenge is valid -- it should return 1 if valid
+or 0 if not.  The parameters are:
+
+* name points to a null-terminated string containing the username
+  supplied by the peer, or the remote name specified with the
+  "remotename" option.
+* ourname points to a null-terminated string containing the name of
+  the local machine (the hostname, or the name specified with the
+  "name" option).
+* id is the value of the id field from the challenge.
+* digest points to a chap_digest_type struct, which contains an
+  identifier for the type of digest in use plus function pointers for
+  functions for dealing with digests of that type.
+* challenge points to the challenge as a counted string (length byte
+  followed by the actual challenge bytes).
+* response points to the response as a counted string.
+* message points to an area of message_space bytes in which to store
+  any message that should be returned to the peer.
+
+
+int (*null_auth_hook)(struct wordlist **paddrs,
+		      struct wordlist **popts);
+
+This hook allows a plugin to determine what the policy should be if
+the peer refuses to authenticate when it is requested to.  If the
+return value is 0, the link will be terminated; if it is 1, the
+connection is allowed to proceed, and in this case *paddrs and *popts
+can be set as for pap_auth_hook, to specify what IP addresses are
+permitted and any extra options to be applied.  If the return value is
+-1, pppd will look in the pap-secrets file as usual.
+
+
+void (*ip_choose_hook)(u_int32_t *addrp);
+
+This hook is called at the beginning of IPCP negotiation.  It gives a
+plugin the opportunity to set the IP address for the peer; the address
+should be stored in *addrp.  If nothing is stored in *addrp, pppd will
+determine the peer's address in the usual manner.
+
+
+int (*allowed_address_hook)(u_int32_t addr)
+
+This hook is called to see if a peer is allowed to use the specified
+address.  If the hook returns 1, the address is accepted.  If it returns
+0, the address is rejected.  If it returns -1, the address is verified
+in the normal away against the appropriate options and secrets files.
+
+
+void (*snoop_recv_hook)(unsigned char *p, int len)
+void (*snoop_send_hook)(unsigned char *p, int len)
+
+These hooks are called whenever pppd receives or sends a packet.  The
+packet is in p; its length is len.  This allows plugins to "snoop in"
+on the pppd conversation.  The hooks may prove useful in implmenting
+L2TP.
+
+
+void (*multilink_join_hook)();
+
+This is called whenever a new link completes LCP negotiation and joins
+the bundle, if we are doing multilink.
+
+
+A plugin registers itself with a notifier by declaring a procedure of
+the form:
+
+void my_notify_proc(void *opaque, int arg);
+
+and then registering the procedure with the appropriate notifier with
+a call of the form
+
+	add_notifier(&interesting_notifier, my_notify_proc, opaque);
+
+The `opaque' parameter in the add_notifier call will be passed to
+my_notify_proc every time it is called.  The `arg' parameter to
+my_notify_proc depends on the notifier.
+
+A notify procedure can be removed from the list for a notifier with a
+call of the form
+
+	remove_notifier(&interesting_notifier, my_notify_proc, opaque);
+
+Here is a list of the currently-implemented notifiers in pppd.
+
+* pidchange.  This notifier is called in the parent when pppd has
+  forked and the child is continuing pppd's processing, i.e. when pppd
+  detaches from its controlling terminal.  The argument is the pid of
+  the child.
+
+* phasechange.  This is called when pppd moves from one phase of
+  operation to another.  The argument is the new phase number.
+
+* exitnotify.  This is called just before pppd exits.  The argument is
+  the status with which pppd will exit (i.e. the argument to exit()).
+
+* sigreceived.  This is called when a signal is received, from within
+  the signal handler.  The argument is the signal number.
+
+* ip_up_notifier.  This is called when IPCP has come up.
+
+* ip_down_notifier.  This is called when IPCP goes down.
+
+* auth_up_notifier.  This is called when the peer has successfully
+  authenticated itself.
+
+* link_down_notifier.  This is called when the link goes down.
+
+
+
+## $Id: PLUGINS,v 1.8 2008/06/15 07:02:18 paulus Exp $ ##
+
+
+-------------------------README.Debian.gz----------------------
+Debian PPP package notes
+========================
+
+Table of contents: 
+
+  + Provided user space scripts
+  + Permissions
+  + Outbound dialing setup
+  + Inbound setup combined with mgetty
+  + Syslog facility level
+  + Logging of ip-up and ip-down
+  + DSL connections
+  + MSS clamping
+  + Naming of PPPoE interfaces
+
+ -- Christoph Lameter <clameter@debian.org>, 22 July 1997
+    Phil Hands <phil@hands.com>
+    Josip Rodin <jrodin@jagor.srce.hr>, 27 November 1999.
+    Marco d'Itri <md@linux.it>
+
+
+Provided user space scripts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Since release 2.3.1, the ppp package provides scripts to conveniently
+control PPP from user space. Note that the scripts only work with the
+proper setup in /etc/ppp. Edit the configuration files and test the
+operation of your link in superuser mode first.
+
+pon		Bring link up. Executes pppd (you may specify the ISP name
+		on the command line), and will immediately return the
+		command prompt while still dialing.
+
+plog 		Shows the last lines of the pppd log. Basically, does
+		tail ppp.log.
+
+poff		Bring link down. Terminates connection by killing pppd.
+
+Please read the manual page pon(1) for specific descriptions of these
+commands.
+
+
+Permissions
+~~~~~~~~~~~
+Access to pppd is controlled via the membership in the "dip" group.
+
+
+Outbound dialing setup
+~~~~~~~~~~~~~~~~~~~~~~
+Edit the file /etc/ppp/peers/provider and put all options in it that you need
+to connect to your server. The most common options are already provided for
+you, and you should only need to set the login name and telephone number.
+
+Edit the file /etc/ppp/pap-secrets and put your password into the designated
+location.
+
+You should then be able to start the PPP connection with pon.
+
+You should never need to modify /etc/ppp/options.
+
+If you want to have PPP started at boot time then add something like this
+to /etc/network/interfaces:
+
+auto myisp
+iface myisp inet ppp
+        provider dsl-provider
+
+
+Inbound setup combined with mgetty
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Note: for this to work you need to have mgetty version >= 0.99 with its
+AutoPPP feature turned on.
+
+Edit the /etc/ppp/options file and uncomment the nameserver lines. Provide
+the IP addresses that you want the users to use for their name services.
+
+To have one options file for each serial port you run mgetty on, use
+the files /etc/ppp/options.ttyXX. Give each serial port an IP address
+in those files. That way that port is locked into using that IP number.
+Think what consequences that assignment might have for outbound use...
+
+That should be enough for dial-up from a Win9x or NT Server. The
+username/password on those system is used for a PAP authentication.
+The /etc/ppp/pap-secrets is already set up for such a situation. Mgetty is
+preconfigured to call pppd with parameters so that the PAP verification will
+be done through the /etc/passwd file.
+
+All your users should now be able to establish PPP connections by just
+specifying phone number, username, and password from Win9x.
+
+Inbound dial-up using dial-up scripts:
+A PPP session can be established from the regular Linux prompt by executing
+/usr/sbin/pppd. The user is limited to use the assigned IP address in
+/etc/ppp/options.ttyname and will not be able to override it.
+
+Note: there is support for callback, it can be done through scripts
+(see /usr/share/doc/ppp/examples/scripts/*callback), and with mgetty's
+`callback' program (see callback(8) manual page).
+
+
+Syslog facility level
+~~~~~~~~~~~~~~~~~~~~~
+The default level of LOG_DAEMON has been overridden (as described in the
+pppd(8) man page), to be LOG_LOCAL2.  The intent being that local2 be sent
+to /var/log/ppp.log for use by plog, if you add the following line to your
+/etc/syslog.conf file:
+
+local2.*		-/var/log/ppp.log
+
+
+Logging of ip-up and ip-down
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+If you want to enable logging of the ip-up and ip-down scripts output,
+then create the file /var/log/ppp-ipupdown.log .
+
+
+DSL connections
+~~~~~~~~~~~~~~~
+The files peers-pppoa, peers-pppoe and interfaces from
+/usr/share/doc/ppp/examples/ contain complete configuration examples
+for the protocols commonly used for DSL connections.
+Beware: the pppoatm kernel driver currently is not autoloaded, so PPPoA
+users probably want to add it to /proc/modules.
+The same applies to PPPoE users who need the br2684 module.
+
+
+MSS clamping
+~~~~~~~~~~~~
+If the computer running pppd acts as a router for other machines, you
+probably want to make it reduce the MSS field of outgoing packets, to
+avoid fragmentation and problems caused by path MTU blackholing.
+You may add something like this to /etc/ppp/ip-up.d/local:
+
+iptables --insert FORWARD 1 --proto tcp --tcp-flags SYN,RST SYN \
+	--out-interface $PPP_IFACE --match tcpmss --mss 1400:1536 \
+	--jump TCPMSS --clamp-mss-to-pmtu
+
+
+Naming of PPPoE interfaces
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+The rp-pppoe plugin usually accepts only eth*, nas* or tap* as interface
+names. Different names can be specified by adding the "nic-" prefix,
+which will be removed by the program.
+
+
+
+-------------------------README.gz----------------------
+This is the README file for ppp-2.4, a package which implements the
+Point-to-Point Protocol (PPP) to provide Internet connections over
+serial lines.
+
+
+Introduction.
+*************
+
+The Point-to-Point Protocol (PPP) provides a standard way to establish
+a network connection over a serial link.  At present, this package
+supports IP and IPV6 and the protocols layered above them, such as TCP
+and UDP.  The Linux port of this package also has support for IPX.
+
+This PPP implementation consists of two parts:
+
+- Kernel code, which establishes a network interface and passes
+packets between the serial port, the kernel networking code and the
+PPP daemon (pppd).  This code is implemented using STREAMS modules on
+Solaris, and as a line discipline under Linux.
+
+- The PPP daemon (pppd), which negotiates with the peer to establish
+the link and sets up the ppp network interface.  Pppd includes support
+for authentication, so you can control which other systems may make a
+PPP connection and what IP addresses they may use.
+
+The platforms supported by this package are Linux and Solaris.  I have
+code for NeXTStep, FreeBSD, SunOS 4.x, SVR4, Tru64 (Digital Unix), AIX
+and Ultrix but no active maintainers for these platforms.  Code for
+all of these except AIX is included in the ppp-2.3.11 release.
+
+The kernel code for Linux is no longer distributed with this package,
+since the relevant kernel code is in the official Linux kernel source
+(and has been for many years) and is included in all reasonably modern
+Linux distributions.  The Linux kernel code supports using PPP over
+things other than serial ports, such as PPP over Ethernet and PPP over
+ATM.
+
+
+Installation.
+*************
+
+The file SETUP contains general information about setting up your
+system for using PPP.  There is also a README file for each supported
+system, which contains more specific details for installing PPP on
+that system.  The supported systems, and the corresponding README
+files, are:
+
+	Linux				README.linux
+	Solaris				README.sol2
+
+In each case you start by running the ./configure script.  This works
+out which operating system you are using and creates the appropriate
+makefiles.  You then run `make' to compile the user-level code, and
+(as root) `make install' to install the user-level programs pppd, chat
+and pppstats.
+
+N.B. Since 2.3.0, leaving the permitted IP addresses column of the
+pap-secrets or chap-secrets file empty means that no addresses are
+permitted.  You need to put a "*" in that column to allow the peer to
+use any IP address.  (This only applies where the peer is
+authenticating itself to you, of course.)
+
+
+What's new in ppp-2.4.7.
+************************
+
+* Fixed a potential security issue in parsing option files (CVE-2014-3158).
+
+* There is a new "stop-bits" option, which takes an argument of 1 or 2,
+  indicating the number of stop bits to use for async serial ports.
+
+* Various bug fixes.
+
+
+What was new in ppp-2.4.6.
+**************************
+
+* Man page updates.
+
+* Several bug fixes.
+
+* Options files can now set and unset environment variables for
+  scripts.
+
+* The timeout for chat scripts can now be taken from an environment
+  variable.
+
+* There is a new option, master_detach, which allows pppd to detach
+  from the controlling terminal when it is the multilink bundle master
+  but its own link has terminated, even if the nodetach option has
+  been given.
+
+
+What was new in ppp-2.4.5.
+**************************
+
+* Under Linux, pppd can now operate in a mode where it doesn't request
+  the peer's IP address, as some peers refuse to supply an IP address.
+  Since Linux supports device routes as well as gateway routes, it's
+  possible to have no remote IP address assigned to the ppp interface
+  and still route traffic over it.
+
+* Pppd now works better with 3G modems that do strange things such as
+  sending IPCP Configure-Naks with the same values over and over again.
+
+* The PPP over L2TP plugin is included, which works with the pppol2tp
+  PPP channel code in the Linux kernel.  This allows pppd to be used
+  to set up tunnels using the Layer 2 Tunneling Protocol.
+
+* A new 'enable-session' option has been added, which enables session
+  accounting via PAM or wtwp/wtmpx, as appropriate.  See the pppd man
+  page for details.
+
+* Several bugs have been fixed.
+
+
+What was new in ppp-2.4.4.
+**************************
+
+* Pppd will now run /etc/ppp/ip-pre-up, if it exists, after creating
+  the ppp interface and configuring its IP addresses but before
+  bringing it up.  This can be used, for example, for adding firewall
+  rules for the interface.
+
+* Lots of bugs fixed, particularly in the area of demand-dialled and
+  persistent connections.
+
+* The rp-pppoe plugin now accepts any interface name (that isn't an
+  existing pppd option name) without putting "nic-" on the front of
+  it, not just eth*, nas*, tap* and br*.
+
+
+What was new in ppp-2.4.3.
+**************************
+
+* The configure script now accepts --prefix and --sysconfdir options.
+  These default to /usr/local and /etc.  If you want pppd put in
+  /usr/sbin as before, use ./configure --prefix=/usr.
+
+* Doing `make install' no longer puts example configuration files in
+  /etc/ppp.  Use `make install-etcppp' if you want that.
+
+* The code has been updated to work with version 0.8.3 of libpcap.
+  Unfortunately the libpcap maintainers removed support for the
+  "inbound" and "outbound" keywords on PPP links, meaning that if you
+  link pppd with libpcap-0.8.3, you can't use those keywords in the
+  active-filter and pass-filter expressions.  The support has been
+  reinstated in the CVS version and should be in future libpcap
+  releases.  If you need the in/outbound keywords, use a later release
+  than 0.8.3, or get the CVS version from http://www.tcpdump.org.
+
+* There is a new option, child-timeout, which sets the length of time
+  that pppd will wait for child processes (such as the command
+  specified with the pty option) to exit before exiting itself.  It
+  defaults to 5 seconds.  After the timeout, pppd will send a SIGTERM
+  to any remaining child processes and exit.  A value of 0 means no
+  timeout.
+
+* Various bugs have been fixed, including some CBCP packet parsing
+  bugs that could lead to the peer being able to crash pppd if CBCP
+  support is enabled.
+
+* Various fixes and enhancements to the radius and rp-pppoe plugins
+  have been added.
+
+* There is a new winbind plugin, from Andrew Bartlet of the Samba
+  team, which provides the ability to authenticate the peer against an
+  NT domain controller using MS-CHAP or MS-CHAPV2.
+
+* There is a new pppoatm plugin, by various authors, sent in by David
+  Woodhouse.
+
+* The multilink code has been substantially reworked.  The first pppd
+  for a bundle still controls the ppp interface, but it doesn't exit
+  until all the links in the bundle have terminated.  If the first
+  pppd is signalled to exit, it signals all the other pppds
+  controlling links in the bundle.
+
+* The TDB code has been updated to the latest version.  This should
+  eliminate the problem that some people have seen where the database
+  file (/var/run/pppd.tdb) keeps on growing.  Unfortunately, however,
+  the new code uses an incompatible database format.  For this reason,
+  pppd now uses /var/run/pppd2.tdb as the database filename.
+
+
+What was new in ppp-2.4.2.
+**************************
+
+* The CHAP code has been rewritten.  Pppd now has support for MS-CHAP
+  V1 and V2 authentication, both as server and client.  The new CHAP
+  code is cleaner than the old code and avoids some copyright problems
+  that existed in the old code.
+
+* MPPE (Microsoft Point-to-Point Encryption) support has been added,
+  although the current implementation shouldn't be considered
+  completely secure.  (There is no assurance that the current code
+  won't ever transmit an unencrypted packet.)
+
+* James Carlson's implementation of the Extensible Authentication
+  Protocol (EAP) has been added.
+
+* Support for the Encryption Control Protocol (ECP) has been added.
+
+* Some new plug-ins have been included:
+  - A plug-in for kernel-mode PPPoE (PPP over Ethernet)
+  - A plug-in for supplying the PAP password over a pipe from another
+    process
+  - A plug-in for authenticating using a Radius server.
+
+* Updates and bug-fixes for the Solaris port.
+
+* The CBCP (Call Back Control Protocol) code has been updated.  There
+  are new options `remotenumber' and `allow-number'.
+
+* Extra hooks for plugins to use have been added.
+
+* There is now a `maxoctets' option, which causes pppd to terminate
+  the link once the number of bytes passed on the link exceeds a given
+  value.
+
+* There are now options to control whether pppd can use the IPCP
+  IP-Address and IP-Addresses options: `ipcp-no-address' and
+  `ipcp-no-addresses'.
+
+* Fixed several bugs, including potential buffer overflows in chat.
+
+
+What was new in ppp-2.4.1.
+**************************
+
+* Pppd can now print out the set of options that are in effect.  The
+  new `dump' option causes pppd to print out the option values after
+  option parsing is complete.  The `dryrun' option causes pppd to
+  print the options and then exit.
+
+* The option parsing code has been fixed so that options in the
+  per-tty options file are parsed correctly, and don't override values
+  from the command line in most cases.
+
+* The plugin option now looks in /usr/lib/pppd/<pppd-version> (for
+  example, /usr/lib/pppd/2.4.1b1) for shared objects for plugins if
+  there is no slash in the plugin name.
+
+* When loading a plugin, pppd will now check the version of pppd for
+  which the plugin was compiled, and refuse to load it if it is
+  different to pppd's version string.  To enable this, the plugin
+  source needs to #include "pppd.h" and have a line saying:
+	char pppd_version[] = VERSION;
+
+* There is a bug in zlib, discovered by James Carlson, which can cause
+  kernel memory corruption if Deflate is used with the lowest setting,
+  8.  As a workaround pppd will now insist on using at least 9.
+
+* Pppd should compile on Solaris and SunOS again.
+
+* Pppd should now set the MTU correctly on demand-dialled interfaces.
+
+
+What was new in ppp-2.4.0.
+**************************
+
+* Multilink: this package now allows you to combine multiple serial
+  links into one logical link or `bundle', for increased bandwidth and
+  reduced latency.  This is currently only supported under the
+  2.4.x and later Linux kernels.
+
+* All the pppd processes running on a system now write information
+  into a common database.  I used the `tdb' code from samba for this.
+
+* New hooks have been added.
+
+For a list of the changes made during the 2.3 series releases of this
+package, see the Changes-2.3 file.
+
+
+Compression methods.
+********************
+
+This package supports two packet compression methods: Deflate and
+BSD-Compress.  Other compression methods which are in common use
+include Predictor, LZS, and MPPC.  These methods are not supported for
+two reasons - they are patent-encumbered, and they cause some packets
+to expand slightly, which pppd doesn't currently allow for.
+BSD-Compress and Deflate (which uses the same algorithm as gzip) don't
+ever expand packets.
+
+
+Contacts.
+*********
+
+The comp.protocols.ppp newsgroup is a useful place to get help if you
+have trouble getting your ppp connections to work.  Please do not send
+me questions of the form "please help me get connected to my ISP" -
+I'm sorry, but I simply do not have the time to answer all the
+questions like this that I get.
+
+If you find bugs in this package, please report them to the maintainer
+for the port for the operating system you are using:
+
+Linux			Paul Mackerras <paulus@samba.org>
+Solaris			James Carlson <carlson@workingcode.com>
+
+
+Copyrights:
+***********
+
+All of the code can be freely used and redistributed.  The individual
+source files each have their own copyright and permission notice.
+Pppd, pppstats and pppdump are under BSD-style notices.  Some of the
+pppd plugins are GPL'd.  Chat is public domain.
+
+
+Distribution:
+*************
+
+The primary site for releases of this software is:
+
+	ftp://ftp.samba.org/pub/ppp/
+
+
+
+
+-------------------------README.MSCHAP80.gz----------------------
+PPP Support for Microsoft's CHAP-80
+===================================
+
+Eric Rosenquist          rosenqui@strataware.com
+(updated by Paul Mackerras)
+(updated by Al Longyear)
+(updated by Farrell Woods)
+(updated by Frank Cusack)
+
+INTRODUCTION
+
+Microsoft has introduced an extension to the Challenge/Handshake
+Authentication Protocol (CHAP) which avoids storing cleartext
+passwords on a server.  (Unfortunately, this is not as secure as it
+sounds, because the encrypted password stored on a server can be used
+by a bogus client to gain access to the server just as easily as if
+the password were stored in cleartext.)  The details of the Microsoft
+extensions can be found in the document:
+
+    <http://www.ietf.org/rfc/rfc2433.txt>
+
+In short, MS-CHAP is identified as <auth chap 80> since the hex value
+of 80 is used to designate Microsoft's scheme.  Standard PPP CHAP uses
+a value of 5.  If you enable PPP debugging with the "debug" option and
+see something like the following in your logs, the remote server is
+requesting MS-CHAP:
+
+  rcvd [LCP ConfReq id=0x2 <asyncmap 0x0> <auth MS> <magic 0x46a3>]
+                                           ^^^^^^^
+
+MS-CHAP is enabled by default under Linux in pppd/Makefile.linux by
+the line "CHAPMS=y".
+
+
+CONFIGURATION
+
+If you've never used PPPD with CHAP before, read the man page (type
+"man pppd") and read the description in there.  Basically, you need to
+edit the "chap-secrets" file typically named /etc/ppp/chap-secrets.
+This should contain the following two lines for each system with which
+you use CHAP (with no leading blanks):
+
+    RemoteHost  Account     Secret
+    Account     RemoteHost  Secret
+
+Note that you need both lines and that item 1 and 2 are swapped in the
+second line.  I'm not sure why you need it twice, but it works and I didn't
+have time to look into it further.  The "RemoteHost" is a somewhat
+arbitrary name for the remote Windows NT system you're dialing.  It doesn't
+have to match the NT system's name, but it *does* have to match what you
+use with the "remotename" parameter.  The "Account" is the Windows NT
+account name you have been told to use when dialing, and the "Secret" is
+the password for that account.  For example, if your service provider calls
+their machine "DialupNT" and tells you your account and password are
+"customer47" and "foobar", add the following to your chap-secrets file:
+
+    DialupNT    customer47  foobar
+    customer47  DialupNT    foobar
+
+The only other thing you need to do for MS-CHAP (compared to normal CHAP)
+is to always use the "remotename" option, either on the command line or in
+your "options" file (see the pppd man page for details).  In the case of
+the above example, you would need to use the following command line:
+
+    pppd name customer47 remotename DialupNT <other options>
+
+or add:
+
+    name customer47
+    remotename DialupNT
+
+to your PPPD "options" file.
+
+The "remotename" option is required for MS-CHAP since Microsoft PPP servers
+don't send their system name in the CHAP challenge packet.
+
+
+E=691 (AUTHENTICATION_FAILURE) ERRORS WHEN YOU HAVE THE VALID SECRET (PASSWORD)
+
+If your RAS server is not the domain controller and is not a 'stand-alone'
+server then it must make a query to the domain controller for your domain.
+
+You need to specify the domain name with the user name when you attempt to
+use this type of a configuration. The domain name is specified with the
+local name in the chap-secrets file and with the option for the 'name'
+parameter.
+
+For example, the previous example would become:
+
+    DialupNT            domain\\customer47   foobar
+    domain\\customer47  DialupNT             foobar
+
+and
+
+    pppd name 'domain\\customer47' remotename DialupNT <other options>
+
+or add:
+
+    name domain\\customer47
+    remotename DialupNT
+
+when the Windows NT domain name is simply called 'domain'.
+
+
+TROUBLESHOOTING
+
+Assuming that everything else has been configured correctly for PPP and
+CHAP, the MS-CHAP-specific problems you're likely to encounter are mostly
+related to your Windows NT account and its settings.  A Microsoft server
+returns error codes in its CHAP response.  The following are extracted from
+RFC 2433:
+
+ 646 ERROR_RESTRICTED_LOGON_HOURS
+ 647 ERROR_ACCT_DISABLED
+ 648 ERROR_PASSWD_EXPIRED
+ 649 ERROR_NO_DIALIN_PERMISSION
+ 691 ERROR_AUTHENTICATION_FAILURE
+ 709 ERROR_CHANGING_PASSWORD
+
+You'll see these in your pppd log as a line similar to:
+
+   Remote message: E=649 R=0
+
+The "E=" is the error number from the table above, and the "R=" flag
+indicates whether the error is transient and the client should retry.  If
+you consistently get error 691, then either you're using the wrong account
+name/password, or the DES library or MD4 hashing (in md4.c) aren't working
+properly.  Verify your account name and password (use a Windows NT or
+Windows 95 system to dial-in if you have one available).  If that checks
+out, test the DES library with the "destest" program included with the DES
+library.  If DES checks out, the md4.c routines are probably failing
+(system byte ordering may be a problem) or my code is screwing up.  I've
+only got access to a Linux system, so you're on your own for anything else.
+
+Another thing that might cause problems is that some RAS servers won't
+respond at all to LCP config requests without seeing the word "CLIENT"
+from the other end.  If you see pppd sending out LCP config requests
+without getting any reply, try putting something in your chat script
+to send the word CLIENT after the modem has connected.
+
+STILL TO DO
+
+A site using only MS-CHAP to authenticate has no need to store cleartext
+passwords in the "chap-secrets" file.  A utility that spits out the ASCII
+hex MD4 hash of a given password would be nice, and would allow that hash
+to be used in chap-secrets in place of the password.  The code to do this
+could quite easily be lifted from chap_ms.c (you have to convert the
+password to Unicode before hashing it).  The chap_ms.c file would also have
+to be changed to recognize a password hash (16 binary bytes == 32 ASCII hex
+characters) and skip the hashing stage.  This would have no real security
+value as the hash is plaintext-equivalent.
+
+
+-------------------------SETUP.gz----------------------
+		Configuring a PPP link.
+
+After you have compiled and installed this package, there are some
+configuration files which will generally need to be set up.  The
+pppd(8) man page is the best reference for the full details; this file
+outlines the configuration process for the most common case, where
+this package is being used to enable a machine to dial an ISP and
+connect to the internet.  The FAQ and README.linux files also provide
+useful information about setting up PPP.
+
+Dialling an ISP.
+****************
+
+Usually, an ISP will assign an IP address to your machine, and will
+refuse to authenticate itself to you.  Some ISPs require a username
+and password to be entered before PPP service commences, while others
+use PPP authentication (using either the PAP or CHAP protocols).
+
+The recommended way to set up to dial an ISP is for the system
+administrator to create a file under /etc/ppp/peers, named for the ISP
+that you will be dialling.  For example, suppose the file is called
+/etc/ppp/peers/isp.  This file would contain something like this:
+
+ttyS0		# modem is connected to /dev/ttyS0
+38400		# run the serial port at 38400 baud
+crtscts		# use hardware flow control
+noauth		# don't require the ISP to authenticate itself
+defaultroute	# use the ISP as our default route
+connect '/usr/sbin/chat -v -f /etc/ppp/chat-isp'
+
+If there are any other pppd options that should apply when calling
+this ISP, they can also be placed in this file.
+
+The /etc/ppp/chat-isp file named in the last line contains the script
+for chat(8) to use to dial the ISP and go through any username/
+password authentication required before PPP service starts.  Here is
+an example (for dialling an Annex terminal server):
+
+ABORT "NO CARRIER"
+ABORT "NO DIALTONE"
+ABORT "ERROR"
+ABORT "NO ANSWER"
+ABORT "BUSY"
+ABORT "Username/Password Incorrect"
+"" "at"
+OK "at&d2&c1"
+OK "atdt2479381"
+"name:" "^Uusername"
+"word:" "\qpassword"
+"annex" "ppp"
+"Switching to PPP-ppp-Switching to PPP"
+
+See the chat(8) man page for details of the script.  If you are not
+sure how the initial dialog with your ISP will go, you could use
+a terminal emulator such as kermit or minicom to go through the
+process manually.
+
+If your ISP requires PAP or CHAP authentication, you will have to
+create a line in /etc/ppp/pap-secrets or /etc/ppp/chap-secrets like
+this:
+
+myhostname	*	"password"
+
+(Replace myhostname with the hostname of your machine.)
+
+At this point, you can initiate the link with the command:
+
+/usr/sbin/pppd call isp
+
+(N.B.: pppd might be installed in a different directory on some
+systems).
+
+This will return to the shell prompt immediately, as pppd will detach
+itself from its controlling terminal.  (If you don't want it to do
+this, use the "nodetach" option.)
+
+Pppd will log messages describing the progress of the connection and
+any errors using the syslog facility (see the syslogd(8) and
+syslog.conf(5) man pages).  Pppd issues messages using syslog facility
+daemon (or local2 if it has been compiled with debugging enabled);
+chat uses facility local2.  It is often useful to see messages of
+priority notice or higher on the console.  To see these, find the line
+in /etc/syslog.conf which has /dev/console on the right-hand side, and
+add `daemon.notice' on the left.  This line should end up something
+like this:
+
+*.err;kern.debug;daemon,local2,auth.notice;mail.crit	/dev/console
+
+If you want to see more messages from pppd, request messages of
+priority info or higher for facility daemon, like this:
+
+*.err;kern.debug;daemon.info;local2,auth.notice;mail.crit  /dev/console
+
+It is also useful to add a line like this:
+
+daemon,local2.debug		/etc/ppp/ppp-log
+
+If you do this, you will need to create an empty /etc/ppp/ppp-log
+file.
+
+After modifying syslog.conf, you will then need to send a HUP signal
+to syslogd (or reboot).
+
+When you wish terminate the PPP link, you should send a TERM or INTR
+signal to pppd.  Pppd writes its process ID to a file called
+ppp<n>.pid in /var/run (or /etc/ppp on older systems such as SunOS or
+Ultrix).  Here <n> is the PPP interface unit number, which will be 0
+unless you have more than one PPP link running simultaneously.  Thus
+you can terminate the link with a command like
+
+	kill `cat /var/run/ppp0.pid`
+
+
